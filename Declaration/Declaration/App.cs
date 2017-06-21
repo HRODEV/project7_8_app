@@ -2,18 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Declaration
 {
-    public partial class App : Application
+    public class App : Application
     {
         public App()
         {
-            InitializeComponent();
-
-            MainPage = new Declaration.MainPage();
+            // The root page of your application
+            MainPage = new Main();
         }
 
         protected override void OnStart()
