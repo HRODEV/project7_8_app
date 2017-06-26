@@ -13,7 +13,7 @@ namespace Project78
 		{
 		}
 
-		private string url = "http://localhost:8080/";
+		private string url = "http://145.24.234.121:8080/";
 
 		public IEnumerable<Declaration> getDeclarations()
 		{
