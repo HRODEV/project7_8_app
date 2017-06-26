@@ -8,7 +8,7 @@ namespace Project78
 		{
 			InitializeComponent();
 
-			MainPage = new Project78Page();
+			MainPage = new NavigationPage(new Project78Page());
 		}
 
 		protected override void OnStart()

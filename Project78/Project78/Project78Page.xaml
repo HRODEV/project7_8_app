@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:Project78" x:Class="Project78.Project78Page">
 	<Label Text="Welcome to Xamarin Forms!" VerticalOptions="Center" HorizontalOptions="Center" />
-	<StackLayout>
+
+	<ListView ItemsSource="{Binding Declarations}" ItemSelected="OnItemSelected">
+		<ListView.ItemTemplate>
+			<DataTemplate>
+				<TextCell Text="{Binding Title}"></TextCell>
+			</DataTemplate>
+		</ListView.ItemTemplate>
+	</ListView>
+	<!--<StackLayout>
 		<Label Text="{Binding Declarations[0].Title}"> </Label>
-	</StackLayout>
+	</StackLayout>-->
 </ContentPage>
