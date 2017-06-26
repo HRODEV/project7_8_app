@@ -8,7 +8,11 @@ namespace Project78
 		{
 			this.BindingContext = new DeclarationViewModel();
 			InitializeComponent();
-			Title = "gay";
+			Title = "Declarations";
+			ToolbarItems.Add(new ToolbarItem("Add", null, async () =>
+			{
+				await Navigation.PushAsync(new DetailedDeclarationPage());
+			}));
 		}
 
 		async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)

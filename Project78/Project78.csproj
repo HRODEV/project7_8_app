@@ -33,6 +33,9 @@
     <EmbeddedResource Include="DetailedDeclarationPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="CameraPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -48,6 +51,9 @@
     <Compile Include="Services\APIService.cs" />
     <Compile Include="DetailedDeclarationPage.xaml.cs">
       <DependentUpon>DetailedDeclarationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CameraPage.xaml.cs">
+      <DependentUpon>CameraPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
