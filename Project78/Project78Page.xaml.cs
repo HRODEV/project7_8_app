@@ -8,12 +8,13 @@ namespace Project78
 		{
 			this.BindingContext = new DeclarationViewModel();
 			InitializeComponent();
+			Title = "gay";
 		}
 
 		async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
 		{
 			ListView lv = (ListView)sender;
-			Declaration shit = (Declaration)lv.SelectedItem;
+			Declaration club = (Declaration)lv.SelectedItem;
 			await Navigation.PushAsync(new DetailedDeclarationPage());
 		}
 	}
