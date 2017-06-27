@@ -1,10 +1,14 @@
 ﻿using Xamarin.Forms;
+using Project78.Services;
+using Project78.Views;
 
 namespace Project78
 {
 	public partial class Project78Page : ContentPage
 	{
-		public Project78Page()
+        private readonly INavigationService _navigationService = new Navigator();
+
+        public Project78Page()
 		{
 			this.BindingContext = new DeclarationViewModel();
 			InitializeComponent();
@@ -13,7 +17,12 @@ namespace Project78
 			{
 				await Navigation.PushAsync(new DetailedDeclarationPage());
 			}));
-		}
+
+            //ToolbarItems.Add(new ToolbarItem("Add", null, () =>
+            //{
+            //    _navigationService.NavigateToDeclaration();
+            //}));
+        }
 
 		async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
 		{
