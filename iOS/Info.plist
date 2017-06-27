@@ -42,5 +42,7 @@
 	<string>Assets.xcassets/AppIcon.appiconset</string>
 	<key>MinimumOSVersion</key>
 	<string>8.0</string>
+	<key>NSCameraUsageDescription</key>
+	<string>This app needs access to the camera to take photos.</string>
 </dict>
 </plist>

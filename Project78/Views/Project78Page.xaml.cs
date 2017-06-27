@@ -15,7 +15,7 @@ namespace Project78
 			Title = "Declarations";
 			ToolbarItems.Add(new ToolbarItem("Add", null, async () =>
 			{
-				await Navigation.PushAsync(new DetailedDeclarationPage());
+				await Navigation.PushAsync(new CameraPage());
 			}));
 
             //ToolbarItems.Add(new ToolbarItem("Add", null, () =>
