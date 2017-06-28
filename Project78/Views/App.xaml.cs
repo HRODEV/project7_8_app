@@ -1,5 +1,6 @@
 ﻿using Xamarin.Forms;
 using Project78.Services;
+using Project78.Views;
 
 namespace Project78
 {

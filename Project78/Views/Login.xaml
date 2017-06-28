@@ -4,7 +4,14 @@
              x:Class="Project78.Views.LoginPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin Forms!" />
+            <Label Text="Welcome Log in!" />
+            <Label Text="Username"/>
+            <Entry Text="{Binding Path=Username}" x:Name="usernameEntry"/>
+
+            <Label Text="Password"/>
+            <Entry Text="{Binding Path=Password}" x:Name="passwordEntry"/>
+          
+            <!--<Button Text="Login" Clicked="OnLoginClicked"/>-->
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
