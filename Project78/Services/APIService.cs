@@ -25,8 +25,13 @@ namespace Project78
 
         public IEnumerable<Declaration> getDeclarations()
         {
-            return RequestJson<List<Declaration>>();
+            return RequestJson<List<Declaration>>("/declarations");
         }
+
+		public Declaration getDeclaration(int id)
+		{
+			return RequestJson<Declaration>("/declarations/" + id.ToString());
+		}
 
         public HttpResponseMessage PostImage(HttpContent content, string filename)
         {
@@ -45,9 +50,9 @@ namespace Project78
             return response;
         }
 
-        private T RequestJson<T>()
+        private T RequestJson<T>(string endpoint)
         {
-            HttpResponseMessage responseshit = client.GetAsync("/declarations").Result;
+            HttpResponseMessage responseshit = client.GetAsync(endpoint).Result;
             string responseBody = responseshit.Content.ReadAsStringAsync().Result;
             return JsonConvert.DeserializeObject<T>(responseBody);
         }
