@@ -16,11 +16,7 @@ namespace Project78
     {
         public APIService()
         {
-            var authData = string.Format("{0}:{1}", "testUsername", "testPassword");
-            var authHeaderValue = Convert.ToBase64String(Encoding.UTF8.GetBytes(authData));
-
             client = new HttpClient { BaseAddress = new Uri("http://37.139.12.76:8080") };  
-            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", authHeaderValue);
         }
         
         private HttpClient client;
