@@ -7,12 +7,11 @@ using Xamarin.Forms;
 
 namespace Project78
 {
-	public class DeclarationViewModel : ViewModelBase
+	public class DeclarationsViewModel : ViewModelBase
 	{
 		private ObservableCollection<Declaration> declarations;
-        private readonly INavigationService _navigator;
 
-		public DeclarationViewModel()
+		public DeclarationsViewModel()
 		{
 			declarations = new ObservableCollection<Declaration>();
 

@@ -20,7 +20,7 @@ namespace Project78.Views
 		private string GenerateFileName() 
 		{
 			Random rnd = new Random();
-			return rnd.Next(100000000).ToString() + ".jpg";
+			return rnd.Next(1000000000).ToString() + ".jpg";
 		}
 
         private byte[] StreamToByteArray(Stream stream)
@@ -40,7 +40,7 @@ namespace Project78.Views
             {
                 PhotoImage.Source = ImageSource.FromStream(() => { return photo.GetStream(); });
 				string filename = GenerateFileName();
-                var jema = new APIService().PostImage(new ByteArrayContent(StreamToByteArray(photo.GetStream())), filename);  
+                HttpResponseMessage response = new APIService().PostImage(new ByteArrayContent(StreamToByteArray(photo.GetStream())), filename);  
             }
 		}
 	}

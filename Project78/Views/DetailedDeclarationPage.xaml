@@ -1,6 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Project78.Views.DetailedDeclarationPage">
 	<ContentPage.Content>
-		<Label Text="Hoi"></Label>
+        <Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="100"/>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+        	<Grid.RowDefinitions>
+				<RowDefinition Height="35" />
+				<RowDefinition Height="35" />
+				<RowDefinition Height="35" />
+				<RowDefinition Height="35" />
+				<RowDefinition Height="35" />
+				<RowDefinition Height="35" />
+				<RowDefinition Height="*" />
+				<RowDefinition Height="35" />
+			</Grid.RowDefinitions>
+			<Label Grid.Row="0" Grid.Column="0" Text="Title" VerticalOptions="Center"/>
+			<Entry x:Name = "Title" Grid.Row = "0" Grid.Column = "1" VerticalOptions="Center" Text="{Binding Path=Declaration.Title}"/>
+			<Label Grid.Row="1" Grid.Column="0" Text="Total" VerticalOptions="Center"/>
+			<Entry x:Name = "Total" Grid.Row = "1" Grid.Column = "1" VerticalOptions="Center" Text="{Binding Path=Declaration.TotalPrice}"/>
+			<Label Grid.Row="2" Grid.Column="0" Text="VAT" VerticalOptions="Center"/>
+			<Entry x:Name = "Vat" Grid.Row = "2" Grid.Column = "1" VerticalOptions="Center" Text="{Binding Path=Declaration.VATPrice}"/>
+			<Label Grid.Row="3" Grid.Column="0" Text="Date" VerticalOptions="Center"/>
+			<Entry x:Name = "Date" Grid.Row = "3" Grid.Column = "1" VerticalOptions="Center" Text="doge"/>
+			<Label Grid.Row="4" Grid.Column="0" Text="Project NR" VerticalOptions="Center"/>
+			<Entry x:Name = "ProjectNr" Grid.Row = "4" Grid.Column = "1" VerticalOptions="Center" Text="doge"/>
+			<Label Grid.Row="5" Grid.Column="0" Text="Description" VerticalOptions="Center"/>
+			<Entry x:Name = "Description" Grid.Row = "5" Grid.Column = "1" VerticalOptions="Center" Text="{Binding Path=Declaration.Description}"/>
+			<Image x:Name = "Image" Grid.Row = "6" Grid.ColumnSpan="2" VerticalOptions="Center" Source="hond.jpg"/>
+			<Button x:Name="submitButton" Text="Submit" Clicked="OnSubmit" />
+		</Grid>
 	</ContentPage.Content>
 </ContentPage>

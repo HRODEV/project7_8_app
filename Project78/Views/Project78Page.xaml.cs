@@ -10,25 +10,21 @@ namespace Project78
 
         public Project78Page()
 		{
-			this.BindingContext = new DeclarationViewModel();
+			this.BindingContext = new DeclarationsViewModel();
 			InitializeComponent();
 			Title = "Declarations";
+
 			ToolbarItems.Add(new ToolbarItem("Add", null, async () =>
 			{
 				await Navigation.PushAsync(new CameraPage());
 			}));
-
-            //ToolbarItems.Add(new ToolbarItem("Add", null, () =>
-            //{
-            //    _navigationService.NavigateToDeclaration();
-            //}));
         }
 
 		async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
 		{
 			ListView lv = (ListView)sender;
-			Declaration club = (Declaration)lv.SelectedItem;
-			await Navigation.PushAsync(new DetailedDeclarationPage());
+			Declaration item = (Declaration)lv.SelectedItem;
+			await Navigation.PushAsync(new DetailedDeclarationPage(item.ID));
 		}
 	}
 }
