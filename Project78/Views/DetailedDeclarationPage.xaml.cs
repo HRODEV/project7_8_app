@@ -18,10 +18,5 @@ namespace Project78.Views
 			this.BindingContext = new DeclartionViewModel(id);
 			InitializeComponent();
 		}
-
-		private void OnSubmit(object sender, EventArgs e)
-		{
-			
-		}
 	}
 }

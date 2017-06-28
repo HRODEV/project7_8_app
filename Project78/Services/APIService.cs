@@ -43,12 +43,25 @@ namespace Project78
             return response;
         }
 
-        private HttpResponseMessage PostRequest(HttpContent content, string endpoint)
+        public HttpResponseMessage PostRequest(HttpContent content, string endpoint)
         {
             var response = client.PostAsync(endpoint, content).Result;
 
             return response;
         }
+
+		public HttpResponseMessage PutRequest(HttpContent content, string endpoint)
+		{
+			HttpRequestMessage request = new HttpRequestMessage(new HttpMethod("PATCH"), endpoint)
+			{
+				Content = content
+			};
+
+			var response = client.SendAsync(request).Result;
+
+            return response;
+		}
+
 
         private T RequestJson<T>(string endpoint)
         {
