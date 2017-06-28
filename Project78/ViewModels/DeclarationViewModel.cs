@@ -15,7 +15,7 @@ namespace Project78
 		public DeclarationViewModel()
 		{
 			declarations = new ObservableCollection<Declaration>();
-
+            _navigator = new Navigator();
 			GetData();
 		}
 
