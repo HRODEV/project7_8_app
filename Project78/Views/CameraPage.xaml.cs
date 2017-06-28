@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using Plugin.Media;
-
 using Xamarin.Forms;
 using System.Net.Http;
 using Newtonsoft.Json;
 using System.Text;
 using System.IO;
-using System.Drawing;
 
 namespace Project78.Views
 {
@@ -17,6 +15,12 @@ namespace Project78.Views
 		{
 			InitializeComponent();
 			CameraButton.Clicked += CameraButton_Clicked;
+		}
+
+		private string GenerateFileName() 
+		{
+			Random rnd = new Random();
+			return rnd.Next(100000000).ToString() + ".jpg";
 		}
 
         private byte[] StreamToByteArray(Stream stream)
@@ -35,8 +39,8 @@ namespace Project78.Views
             if (photo != null)
             {
                 PhotoImage.Source = ImageSource.FromStream(() => { return photo.GetStream(); });
-
-                var jema = new APIService().PostImage(new ByteArrayContent(StreamToByteArray(photo.GetStream())));  
+				string filename = GenerateFileName();
+                var jema = new APIService().PostImage(new ByteArrayContent(StreamToByteArray(photo.GetStream())), filename);  
             }
 		}
 	}
