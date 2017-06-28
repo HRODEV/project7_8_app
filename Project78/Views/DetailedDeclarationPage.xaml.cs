@@ -17,7 +17,7 @@ namespace Project78.Views
 		{
 			var vm = new DeclarationViewModel(id);
             this.BindingContext = vm;
-            
+			vm.Navigation = Navigation;
 			InitializeComponent();
 		}
 	}

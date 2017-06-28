@@ -11,6 +11,8 @@ namespace Project78.Views
 {
 	public partial class CameraPage : ContentPage
 	{
+
+
 		public CameraPage()
 		{
 			InitializeComponent();
@@ -40,7 +42,8 @@ namespace Project78.Views
             {
                 PhotoImage.Source = ImageSource.FromStream(() => { return photo.GetStream(); });
 				string filename = GenerateFileName();
-                HttpResponseMessage response = new APIService().PostImage(new ByteArrayContent(StreamToByteArray(photo.GetStream())), filename);  
+                Declaration response = new APIService().PostImage(new ByteArrayContent(StreamToByteArray(photo.GetStream())), filename);
+				await Navigation.PushAsync(new DetailedDeclarationPage(response.ID));
             }
 		}
 	}
