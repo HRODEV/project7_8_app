@@ -18,6 +18,14 @@ namespace Project78.Models
             Password = pw;
         }
 
+        public User(string email, string fname, string lname, string pw)
+        {
+            Email = email;
+            FirstName = fname;
+            LastName = lname;
+            Password = pw;
+        }
+
         [JsonProperty(PropertyName = "ID")]
         public int ID { get; set; }
 

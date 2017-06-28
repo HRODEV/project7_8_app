@@ -25,5 +25,26 @@ namespace Project78
 			get;
 			set;
 		}
+
+		[JsonProperty(PropertyName = "date")]
+		public DateTime Date
+		{
+			get;
+			set;
+		}
+
+		[JsonProperty(PropertyName = "VATPrice")]
+		public float VATPrice
+		{
+			get;
+			set;
+		}
+
+		[JsonProperty(PropertyName = "TotalPrice")]
+		public float TotalPrice
+		{
+			get;
+			set;
+		}
 	}
 }

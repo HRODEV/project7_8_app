@@ -3,8 +3,35 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Project78.Views.RegisterPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin Forms!" />
+        <StackLayout Padding="30"
+             VerticalOptions="Start">
+            <Label Text="Email"
+          HorizontalOptions="Center"/>
+            <Entry Text="{Binding Email}"
+          x:Name="EntryEmail"/>
+            <Label Text="FirstName"
+                   HorizontalOptions="Center"/>
+            <Entry Text="{Binding FirstName}"
+                   x:Name="EntryFirstName"/>
+            <Label Text="LastName"
+                   HorizontalOptions="Center"/>
+            <Entry Text="{Binding LastName}"
+                   x:Name="EntryLastName"/>
+            <Label Text="Password"
+          HorizontalOptions="Center"/>
+            <Entry Text="{Binding FirstPassword}"
+                x:Name="EntryFPassword"
+                IsPassword="True"/>   
+            <Label Text="Password"
+                HorizontalOptions="Center"/>
+            <Entry Text="{Binding SecondPassword}"
+                x:Name="EntrySPassword"
+                IsPassword="True"/>
+            <Button Text="Create Account"
+                Command="{Binding CreateAccountCommand}" 
+                TextColor="White"
+                BackgroundColor="#22A7F0"
+                x:Name="ButtonRegister"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
