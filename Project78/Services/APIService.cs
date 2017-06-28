@@ -28,10 +28,10 @@ namespace Project78
             return RequestJson<List<Declaration>>();
         }
 
-        public HttpResponseMessage PostImage(HttpContent content)
+        public HttpResponseMessage PostImage(HttpContent content, string filename)
         {
             var testcontent = new MultipartFormDataContent();
-            testcontent.Add(content, "image", "test.jpg");
+            testcontent.Add(content, "image", filename);
 
             HttpResponseMessage response = client.PostAsync("/receipt", testcontent).Result;
 
