@@ -43,9 +43,9 @@ namespace Project78
             return response;
         }
 
-        private HttpResponseMessage PostRequest(HttpContent content)
+        private HttpResponseMessage PostRequest(HttpContent content, string endpoint)
         {
-            var response = client.PostAsync("/receipt", content).Result;
+            var response = client.PostAsync(endpoint, content).Result;
 
             return response;
         }
