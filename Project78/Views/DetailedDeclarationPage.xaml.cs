@@ -15,7 +15,9 @@ namespace Project78.Views
 		
 		public DetailedDeclarationPage(int id)
 		{
-			this.BindingContext = new DeclartionViewModel(id);
+			var vm = new DeclarationViewModel(id);
+            this.BindingContext = vm;
+            
 			InitializeComponent();
 		}
 

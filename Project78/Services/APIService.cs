@@ -43,14 +43,14 @@ namespace Project78
             return response;
         }
 
-        private HttpResponseMessage PostRequest(HttpContent content, string endpoint)
+        public HttpResponseMessage PostRequest(HttpContent content, string endpoint)
         {
             var response = client.PostAsync(endpoint, content).Result;
 
             return response;
         }
 
-        private T RequestJson<T>(string endpoint)
+        public T RequestJson<T>(string endpoint)
         {
             HttpResponseMessage responseshit = client.GetAsync(endpoint).Result;
             string responseBody = responseshit.Content.ReadAsStringAsync().Result;

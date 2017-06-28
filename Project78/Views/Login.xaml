@@ -3,8 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Project78.Views.LoginPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin Forms!" />
+        <StackLayout Padding="30"
+                VerticalOptions="Start">
+            <Label Text="Username"
+                HorizontalOptions="Center"/>
+            <Entry Text=""
+                x:Name="EntryUsername"/>
+            <Label Text="Password"
+                HorizontalOptions="Center"/>
+            <Entry Text=""
+                x:Name="EntryPassword"
+                IsPassword="True"/>
+            <Button Text="Login"
+                Command="{Binding NavigateToDeclarations}"
+                TextColor="White"
+                BackgroundColor="#22A7F0"
+                x:Name="ButtonLogin"/>   
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

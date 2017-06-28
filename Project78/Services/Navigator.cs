@@ -10,6 +10,11 @@ namespace Project78.Services
 {
     public class Navigator : INavigationService
     {
+
+        public Navigator()
+        {
+            //Navigation = new INavigation();
+        }
         private readonly INavigation Navigation;
 
         public async Task NavigateToContentPage(ContentPage page)

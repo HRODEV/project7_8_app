@@ -1,11 +1,14 @@
 ﻿using System;
+using Xamarin.Forms;
+
 namespace Project78
 {
-	public class DeclartionViewModel : ViewModelBase
+	public class DeclarationViewModel : ViewModelBase
 	{
 		private Declaration declaration;
+        public INavigation Navigation;
 
-		public DeclartionViewModel(int id)
+		public DeclarationViewModel(int id)
 		{
 			declaration = new Declaration();
 			GetData(id);
