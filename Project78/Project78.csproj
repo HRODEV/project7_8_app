@@ -41,6 +41,7 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Services\INavigationService.cs" />
     <Compile Include="Services\Navigator.cs" />
+    <Compile Include="ViewModels\RegistrationViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
     <Compile Include="Views\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>

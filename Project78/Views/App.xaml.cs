@@ -1,5 +1,6 @@
 ﻿using Xamarin.Forms;
 using Project78.Services;
+using Project78.Views;
 
 namespace Project78
 {
@@ -8,8 +9,9 @@ namespace Project78
 		public App()
 		{
 			InitializeComponent();
-            MainPage = new NavigationPage(new Project78Page());
-		}
+            //MainPage = new NavigationPage(new Project78Page());
+            MainPage = new RegisterPage();
+        }
 
 		protected override void OnStart()
 		{
