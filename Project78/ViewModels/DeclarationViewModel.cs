@@ -44,6 +44,7 @@ namespace Project78
 		private void Update()
 		{
 			Debug.WriteLine(new APIService().PutRequest(new StringContent(JsonConvert.SerializeObject(Declaration), Encoding.UTF8, "application/json"), "/declarations/" + declaration.ID.ToString()));
+			Navigation.PushModalAsync(new NavigationPage(new Project78Page()));
 		}
 
 	}

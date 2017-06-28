@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using System.Net.Http;
 using Microsoft.VisualBasic;
 using System.Text;
+using Xamarin.Forms;
 using Project78.Models;
 
 namespace Project78
@@ -42,15 +43,25 @@ namespace Project78
 			return RequestJson<Declaration>("/declarations/" + id.ToString());
 		}
 
-        public HttpResponseMessage PostImage(HttpContent content, string filename)
+        public Declaration PostImage(HttpContent content, string filename)
         {
             var testcontent = new MultipartFormDataContent();
             testcontent.Add(content, "image", filename);
 
             HttpResponseMessage response = client.PostAsync("/receipt", testcontent).Result;
-
-            return response;
+			if (response.IsSuccessStatusCode)
+			{
+				string responseBody = response.Content.ReadAsStringAsync().Result;
+				return new Declaration { ID = 1 };
+				//return JsonConvert.DeserializeObject<Declaration>(responseBody);                              
+			}
+			return new Declaration();
         }
+
+		public Image GetImage(int id)
+		{
+			return RequestJson<Image>("/declarations/" + id.ToString());
+		}
 
         public HttpResponseMessage PostRequest(HttpContent content, string endpoint)
         {
