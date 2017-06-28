@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace Project78
+namespace Project78.Models
 {
 	public class Declaration
 	{

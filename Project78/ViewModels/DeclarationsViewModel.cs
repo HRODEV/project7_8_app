@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using Project78.Services;
 using Xamarin.Forms;
+using Project78.Models;
 
 namespace Project78
 {

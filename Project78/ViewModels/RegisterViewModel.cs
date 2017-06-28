@@ -18,16 +18,8 @@ namespace Project78.ViewModels
     class RegisterViewModel : ViewModelBase
     {
         string fpassword, spassword, fname, lname, email;
-
         APIService _api = new APIService();
         public INavigation Navigation;
-
-        public User CreateUser(string email, string fname, string lname, string password)
-        {
-            return new User(email, fname, lname, password);
-        }
-
-        //createAccount(new User()) => new User(em, fn, ln, pw);
 
         Action<string> action = (lol) => Debug.WriteLine(lol);
 
@@ -38,10 +30,11 @@ namespace Project78.ViewModels
             {
                 var user = new User(Email, FirstName, LastName, FirstPassword);
                 var jsonUser = JsonConvert.SerializeObject(user);
-                var content = new StringContent(jsonUser, Encoding.UTF8, "application/json");
-                _api.PostRequest(content, "/user");
+                var content = new StringContent(jsonUser, Encoding.UTF8, "application/json");           
+                var post = _api.PostRequest(content, "/user");
 
-                Navigation.PushModalAsync(new NavigationPage(new StartUpPage()));
+                if (post.IsSuccessStatusCode)
+                    Navigation.PushModalAsync(new NavigationPage(new StartUpPage()));
             });
         }
 

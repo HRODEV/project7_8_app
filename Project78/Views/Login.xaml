@@ -5,13 +5,13 @@
     <ContentPage.Content>
         <StackLayout Padding="30"
                 VerticalOptions="Start">
-            <Label Text="Username"
+            <Label Text="Email"
                 HorizontalOptions="Center"/>
-            <Entry Text=""
-                x:Name="EntryUsername"/>
+            <Entry Text="{Binding Email}"
+                x:Name="EntryEmail"/>
             <Label Text="Password"
                 HorizontalOptions="Center"/>
-            <Entry Text=""
+            <Entry Text="{Binding Password}"
                 x:Name="EntryPassword"
                 IsPassword="True"/>
             <Button Text="Login"

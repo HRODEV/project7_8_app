@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System.Net.Http;
 using System.Text;
 using System.Diagnostics;
+using Project78.Models;
 
 namespace Project78
 {
@@ -24,7 +25,6 @@ namespace Project78
 		{
 			declaration = new APIService().getDeclaration(id);
 		}
-
 
 		public Declaration Declaration
 		{
