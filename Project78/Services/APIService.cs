@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using System.Net.Http;
 using Microsoft.VisualBasic;
 using System.Text;
+using Project78.Models;
 
 namespace Project78
 {
@@ -20,13 +21,22 @@ namespace Project78
             client = new HttpClient { BaseAddress = new Uri("http://37.139.12.76:8080") };  
             client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", authHeaderValue);
         }
-
+        
         private HttpClient client;
 
         public IEnumerable<Declaration> getDeclarations()
         {
             return RequestJson<List<Declaration>>("/declarations");
         }
+
+        public User getAuthenticateUser(string authenticationHeader)
+        {
+
+            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", authenticationHeader);
+
+            return RequestJson<User>("user/auth/");
+        }
+
 
 		public Declaration getDeclaration(int id)
 		{
