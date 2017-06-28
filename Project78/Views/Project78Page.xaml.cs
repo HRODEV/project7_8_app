@@ -18,6 +18,7 @@ namespace Project78
 			{
 				await Navigation.PushAsync(new CameraPage());
 			}));
+
         }
 
 		async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)

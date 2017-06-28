@@ -50,7 +50,20 @@ namespace Project78
             return response;
         }
 
-        public T RequestJson<T>(string endpoint)
+		public HttpResponseMessage PutRequest(HttpContent content, string endpoint)
+		{
+			HttpRequestMessage request = new HttpRequestMessage(new HttpMethod("PATCH"), endpoint)
+			{
+				Content = content
+			};
+
+			var response = client.SendAsync(request).Result;
+
+            return response;
+		}
+
+
+        private T RequestJson<T>(string endpoint)
         {
             HttpResponseMessage responseshit = client.GetAsync(endpoint).Result;
             string responseBody = responseshit.Content.ReadAsStringAsync().Result;

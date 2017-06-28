@@ -17,19 +17,19 @@
 				<RowDefinition Height="35" />
 			</Grid.RowDefinitions>
 			<Label Grid.Row="0" Grid.Column="0" Text="Title" VerticalOptions="Center"/>
-			<Entry x:Name = "Title" Grid.Row = "0" Grid.Column = "1" VerticalOptions="Center" Text="{Binding Path=Declaration.Title}"/>
+			<Entry x:Name = "Title" Grid.Row = "0" Grid.Column = "1" VerticalOptions="Center" Text="{Binding Path=Declaration.Title, Mode=TwoWay}"/>
 			<Label Grid.Row="1" Grid.Column="0" Text="Total" VerticalOptions="Center"/>
-			<Entry x:Name = "Total" Grid.Row = "1" Grid.Column = "1" VerticalOptions="Center" Text="{Binding Path=Declaration.TotalPrice}"/>
+			<Entry x:Name = "Total" Grid.Row = "1" Grid.Column = "1" VerticalOptions="Center" Text="{Binding Path=Declaration.TotalPrice, Mode=TwoWay}"/>
 			<Label Grid.Row="2" Grid.Column="0" Text="VAT" VerticalOptions="Center"/>
-			<Entry x:Name = "Vat" Grid.Row = "2" Grid.Column = "1" VerticalOptions="Center" Text="{Binding Path=Declaration.VATPrice}"/>
+			<Entry x:Name = "Vat" Grid.Row = "2" Grid.Column = "1" VerticalOptions="Center" Text="{Binding Path=Declaration.VATPrice, Mode=TwoWay}"/>
 			<Label Grid.Row="3" Grid.Column="0" Text="Date" VerticalOptions="Center"/>
 			<Entry x:Name = "Date" Grid.Row = "3" Grid.Column = "1" VerticalOptions="Center" Text="doge"/>
 			<Label Grid.Row="4" Grid.Column="0" Text="Project NR" VerticalOptions="Center"/>
 			<Entry x:Name = "ProjectNr" Grid.Row = "4" Grid.Column = "1" VerticalOptions="Center" Text="doge"/>
 			<Label Grid.Row="5" Grid.Column="0" Text="Description" VerticalOptions="Center"/>
-			<Entry x:Name = "Description" Grid.Row = "5" Grid.Column = "1" VerticalOptions="Center" Text="{Binding Path=Declaration.Description}"/>
+			<Entry x:Name = "Description" Grid.Row = "5" Grid.Column = "1" VerticalOptions="Center" Text="{Binding Path=Declaration.Description, Mode=TwoWay}"/>
 			<Image x:Name = "Image" Grid.Row = "6" Grid.ColumnSpan="2" VerticalOptions="Center" Source="hond.jpg"/>
-			<Button x:Name="submitButton" Text="Submit" Clicked="OnSubmit" />
+			<Button x:Name="submitButton" Grid.Row = "7" Text="Submit" Grid.ColumnSpan="2" Command="{Binding UpdateCommand}" VerticalOptions="Center" />
 		</Grid>
 	</ContentPage.Content>
 </ContentPage>

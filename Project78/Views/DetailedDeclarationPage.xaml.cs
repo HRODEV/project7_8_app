@@ -20,10 +20,5 @@ namespace Project78.Views
             
 			InitializeComponent();
 		}
-
-		private void OnSubmit(object sender, EventArgs e)
-		{
-			
-		}
 	}
 }
