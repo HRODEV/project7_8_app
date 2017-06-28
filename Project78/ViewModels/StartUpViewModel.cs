@@ -21,9 +21,5 @@ namespace Project78.ViewModels
 
         public ICommand NavigateToLogin { get; protected set; }
         public ICommand NavigateToRegister { get; protected set; }
-
-
-
-
     }
 }

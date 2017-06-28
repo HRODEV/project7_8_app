@@ -28,10 +28,9 @@ namespace Project78.ViewModels
             _navigator = new Navigator();
             CreateAccountCommand = new Command(() =>
             {
-                var user = new User(Email, FirstName, LastName, FirstPassword);
-                var jsonUser = JsonConvert.SerializeObject(user);
+                var jsonUser = JsonConvert.SerializeObject(new User(Email, FirstName, LastName, FirstPassword));
                 var content = new StringContent(jsonUser, Encoding.UTF8, "application/json");           
-                var post = _api.PostRequest(content, "/user");
+                HttpResponseMessage post = _api.PostRequest(content, "/user");
 
                 if (post.IsSuccessStatusCode)
                     Navigation.PushModalAsync(new NavigationPage(new StartUpPage()));

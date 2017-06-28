@@ -30,9 +30,9 @@ namespace Project78
         {
             client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", authenticationHeader);
 
-            return RequestJson<User>("user/auth/");
+            //return RequestJson<User>("user/auth/");
+            return new User("A", "b", "c", "d");
         }
-
 
 		public Declaration getDeclaration(int id)
 		{
@@ -77,7 +77,6 @@ namespace Project78
 
             return response;
 		}
-
 
         private T RequestJson<T>(string endpoint)
         {
