@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace Project78.Models
 {
-    class User
+    public class User
     {
         public User(int id, string email, string fname, string lname, string pw)
         {

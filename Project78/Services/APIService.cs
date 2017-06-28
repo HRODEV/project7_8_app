@@ -31,7 +31,6 @@ namespace Project78
 
         public User getAuthenticateUser(string authenticationHeader)
         {
-
             client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", authenticationHeader);
 
             return RequestJson<User>("user/auth/");
