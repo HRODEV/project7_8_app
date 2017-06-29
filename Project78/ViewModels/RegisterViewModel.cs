@@ -9,20 +9,17 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using Project78.Models;
 using System.Diagnostics;
+using Newtonsoft.Json;
+using System.Net.Http;
+using Project78.Views;
 
 namespace Project78.ViewModels
 {
     class RegisterViewModel : ViewModelBase
     {
         string fpassword, spassword, fname, lname, email;
-
-
-        public User CreateUser(string email, string fname, string lname, string password)
-        {
-            return new User(email, fname, lname, password);
-        }
-
-        //createAccount(new User()) => new User(em, fn, ln, pw);
+        APIService _api = new APIService();
+        public INavigation Navigation;
 
         Action<string> action = (lol) => Debug.WriteLine(lol);
 
@@ -31,12 +28,16 @@ namespace Project78.ViewModels
             _navigator = new Navigator();
             CreateAccountCommand = new Command(() =>
             {
-                var user = new User(Email, FirstName, LastName, FirstPassword);
+                var jsonUser = JsonConvert.SerializeObject(new User(Email, FirstName, LastName, FirstPassword));
+                var content = new StringContent(jsonUser, Encoding.UTF8, "application/json");           
+                HttpResponseMessage post = _api.PostRequest(content, "/user");
+
+                if (post.IsSuccessStatusCode)
+                    Navigation.PushModalAsync(new NavigationPage(new StartUpPage()));
             });
         }
 
         public ICommand CreateAccountCommand { get; protected set; } //TO DO: create the command in the constructor
-
 
         public string FirstPassword
         {

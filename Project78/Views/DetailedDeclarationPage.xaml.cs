@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Project78.Models;
 
 
 using Xamarin.Forms;
@@ -12,16 +13,22 @@ namespace Project78.Views
 
 	public partial class DetailedDeclarationPage : ContentPage
 	{
-		
-		public DetailedDeclarationPage(int id)
-		{
-			this.BindingContext = new DeclartionViewModel(id);
-			InitializeComponent();
-		}
+		private DeclarationViewModel vm;
 
-		private void OnSubmit(object sender, EventArgs e)
+		public DetailedDeclarationPage(Declaration declaration)
 		{
-			
+			if (declaration.ID != 0)
+			{
+				vm = new DeclarationViewModel(declaration.ID);
+				this.BindingContext = vm;
+			}
+			else 
+			{
+				vm = new DeclarationViewModel(declaration);
+				this.BindingContext = vm;
+			}
+			vm.Navigation = Navigation;
+			InitializeComponent();
 		}
 	}
 }

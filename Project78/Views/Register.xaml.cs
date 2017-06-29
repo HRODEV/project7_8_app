@@ -15,7 +15,10 @@ namespace Project78.Views
     {
         public RegisterPage()
         {
-            this.BindingContext = new RegisterViewModel(); 
+            var vm = new RegisterViewModel();
+            this.BindingContext = vm;
+            vm.Navigation = Navigation;
+
             InitializeComponent();
         }
     }

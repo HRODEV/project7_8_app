@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace Project78
+namespace Project78.Models
 {
 	public class Declaration
 	{
@@ -42,6 +42,20 @@ namespace Project78
 
 		[JsonProperty(PropertyName = "TotalPrice")]
 		public float TotalPrice
+		{
+			get;
+			set;
+		}
+
+		[JsonProperty(PropertyName = "StoreName")]
+		public string StoreName
+		{
+			get;
+			set;
+		}
+
+		[JsonProperty(PropertyName = "ReiceptID")]
+		public int ReceiptID
 		{
 			get;
 			set;
