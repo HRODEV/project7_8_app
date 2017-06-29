@@ -48,8 +48,7 @@ namespace Project78
 			if (response.IsSuccessStatusCode)
 			{
 				string responseBody = response.Content.ReadAsStringAsync().Result;
-				return new Declaration { ID = 1 };
-				//return JsonConvert.DeserializeObject<Declaration>(responseBody);                              
+				return JsonConvert.DeserializeObject<Declaration>(responseBody);                              
 			}
 			return new Declaration();
         }
@@ -66,7 +65,7 @@ namespace Project78
             return response;
         }
 
-		public HttpResponseMessage PutRequest(HttpContent content, string endpoint)
+		public HttpResponseMessage PatchRequest(HttpContent content, string endpoint)
 		{
 			HttpRequestMessage request = new HttpRequestMessage(new HttpMethod("PATCH"), endpoint)
 			{

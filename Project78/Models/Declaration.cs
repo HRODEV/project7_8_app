@@ -46,5 +46,19 @@ namespace Project78.Models
 			get;
 			set;
 		}
+
+		[JsonProperty(PropertyName = "StoreName")]
+		public string StoreName
+		{
+			get;
+			set;
+		}
+
+		[JsonProperty(PropertyName = "ReiceptID")]
+		public int ReceiptID
+		{
+			get;
+			set;
+		}
 	}
 }

@@ -16,9 +16,16 @@ namespace Project78
 
 		public DeclarationViewModel(int id)
 		{
-			updateCommand = new Command(Update);
+			updateCommand = new Command(Patch);
 			declaration = new Declaration();
 			GetData(id);
+		}
+
+		public DeclarationViewModel(Declaration declaration)
+		{
+			updateCommand = new Command(Post);
+			this.declaration = declaration;
+			this.declaration.Date = DateTime.Now;
 		}
 
 		private void GetData(int id)
@@ -41,11 +48,16 @@ namespace Project78
 
 		public Command UpdateCommand { get { return updateCommand;} }
 
-		private void Update()
+		private void Patch()
 		{
-			Debug.WriteLine(new APIService().PutRequest(new StringContent(JsonConvert.SerializeObject(Declaration), Encoding.UTF8, "application/json"), "/declarations/" + declaration.ID.ToString()));
+			Debug.WriteLine(new APIService().PatchRequest(new StringContent(JsonConvert.SerializeObject(Declaration), Encoding.UTF8, "application/json"), "/declarations/" + declaration.ID.ToString()));
 			Navigation.PushModalAsync(new NavigationPage(new Project78Page()));
 		}
 
+		private void Post()
+		{
+			Debug.WriteLine(new APIService().PostRequest(new StringContent(JsonConvert.SerializeObject(Declaration), Encoding.UTF8, "application/json"), "/declarations/"));
+			Navigation.PushModalAsync(new NavigationPage(new Project78Page()));			                
+		}
 	}
 }

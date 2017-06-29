@@ -15,6 +15,7 @@ namespace Project78
 
         public Project78Page()
 		{
+			PhotoImage = new Image();
 			this.BindingContext = new DeclarationsViewModel();
 			InitializeComponent();
 			Title = "Declarations";
@@ -27,7 +28,7 @@ namespace Project78
                 {
                     PhotoImage.Source = ImageSource.FromStream(() => { return photo.GetStream(); });
                     Declaration response = new APIService().PostImage(new ByteArrayContent(StreamToByteArray(photo.GetStream())), GenerateFileName());
-                    await Navigation.PushAsync(new DetailedDeclarationPage(response.ID));
+                    await Navigation.PushAsync(new DetailedDeclarationPage(response));
                 }
             }));
         }
@@ -50,11 +51,11 @@ namespace Project78
             }
         }
 
-        async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+        async void OnItemSelected(object sender, ItemTappedEventArgs e)
 		{
 			ListView lv = (ListView)sender;
 			Declaration item = (Declaration)lv.SelectedItem;
-			await Navigation.PushAsync(new DetailedDeclarationPage(item.ID));
+			await Navigation.PushAsync(new DetailedDeclarationPage(item));
 		}
 	}
 }
