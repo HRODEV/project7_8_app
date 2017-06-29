@@ -22,6 +22,7 @@ namespace Project78
 
 			ToolbarItems.Add(new ToolbarItem("Add", null, async () =>
 			{
+                await Navigation.PushAsync(new WaitPage());
                 var photo = await Plugin.Media.CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions() { });
 
                 if (photo != null)
