@@ -6,7 +6,7 @@ using Project78.Models;
 
 
 using Xamarin.Forms;
-
+using System.Diagnostics;
 
 namespace Project78.Views
 {
@@ -15,9 +15,30 @@ namespace Project78.Views
 	{
 		private DeclarationViewModel vm;
 
-		public DetailedDeclarationPage(Declaration declaration)
+        //async void OnAlertYesNoClicked(object sender, EventArgs e)
+        //{
+
+        //}
+
+        public DetailedDeclarationPage(Declaration declaration)
 		{
-			if (declaration.ID != 0)
+
+            ToolbarItems.Add(new ToolbarItem("Delete", null, async () =>
+            {
+                var answer = await DisplayAlert("", "Do you want to delete this declaration?", "Yes", "No");
+                Debug.WriteLine("Answer: " + answer);
+
+                if (answer) //if the user clicks on yes
+                {
+                    //delete request
+                    Navigation.PushModalAsync(new Project78Page());
+                }
+                //await Navigation.PushAsync(new WaitPage());
+                var test = "l";
+            }));
+
+
+            if (declaration.ID != 0)
 			{
 				vm = new DeclarationViewModel(declaration.ID);
 				this.BindingContext = vm;
