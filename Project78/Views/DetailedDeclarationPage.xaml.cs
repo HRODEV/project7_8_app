@@ -20,12 +20,11 @@ namespace Project78.Views
             ToolbarItems.Add(new ToolbarItem("Delete", null, async () =>
             {
                 var answer = await DisplayAlert("", "Do you want to delete this declaration?", "Yes", "No");
-                Debug.WriteLine("Answer: " + answer);
 
                 if (answer) //if the user clicks on yes
                 {
-                    var response = new APIService().DeleteRequest(declaration.ID, "/declarations/");
-                    await Navigation.PushModalAsync(new Project78Page());
+                    //var response = new APIService().DeleteRequest(declaration.ID, "/declarations/");
+                    await Navigation.PushModalAsync(new NavigationPage(new Project78Page()));
                 }
             }));
 
