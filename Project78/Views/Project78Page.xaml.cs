@@ -5,6 +5,7 @@ using Project78.Models;
 using System.Net.Http;
 using System;
 using System.IO;
+using System.Diagnostics;
 
 namespace Project78
 {
@@ -28,8 +29,8 @@ namespace Project78
                 if (photo != null)
                 {
                     PhotoImage.Source = ImageSource.FromStream(() => { return photo.GetStream(); });
-                    Declaration response = new APIService().PostImage(new ByteArrayContent(StreamToByteArray(photo.GetStream())), GenerateFileName());
-                    await Navigation.PushAsync(new DetailedDeclarationPage(response));
+                    Debug.WriteLine(new APIService().PostImage(new ByteArrayContent(StreamToByteArray(photo.GetStream())), GenerateFileName()));
+                    //await Navigation.PushAsync(new DetailedDeclarationPage(response));
 					Navigation.RemovePage(wait);
                 }
             }));
@@ -57,7 +58,7 @@ namespace Project78
 		{
 			ListView lv = (ListView)sender;
 			Declaration item = (Declaration)lv.SelectedItem;
-			await Navigation.PushAsync(new DetailedDeclarationPage(item));
+			await Navigation.PushAsync(new EneditableDeclarationPage(item));
 		}
 	}
 }
