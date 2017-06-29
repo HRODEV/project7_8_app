@@ -11,8 +11,8 @@ namespace Project78
 	public class DeclarationViewModel : ViewModelBase
 	{
 		private Declaration declaration;
-        public INavigation Navigation;
 		private Command updateCommand;
+		public INavigation Navigation;
 
 		public DeclarationViewModel(int id)
 		{
@@ -30,7 +30,7 @@ namespace Project78
 
 		private void GetData(int id)
 		{
-			declaration = new APIService().getDeclaration(id);
+			Declaration = new APIService().getDeclaration(id);
 		}
 
 		public Declaration Declaration
@@ -50,13 +50,13 @@ namespace Project78
 
 		private void Patch()
 		{
-			Debug.WriteLine(new APIService().PatchRequest(new StringContent(JsonConvert.SerializeObject(Declaration), Encoding.UTF8, "application/json"), "/declarations/" + declaration.ID.ToString()));
+			Debug.WriteLine(new APIService().PatchRequest(new StringContent(JsonConvert.SerializeObject(Declaration), Encoding.UTF8, "application/json"), "/declarations/" + declaration.ID.ToString()).Content.ReadAsStringAsync().Result);
 			Navigation.PushModalAsync(new NavigationPage(new Project78Page()));
 		}
 
 		private void Post()
 		{
-			Debug.WriteLine(new APIService().PostRequest(new StringContent(JsonConvert.SerializeObject(Declaration), Encoding.UTF8, "application/json"), "/declarations/"));
+			Debug.WriteLine(new APIService().PostRequest(new StringContent(JsonConvert.SerializeObject(Declaration), Encoding.UTF8, "application/json"), "/declarations").Content.ReadAsStringAsync().Result);
 			Navigation.PushModalAsync(new NavigationPage(new Project78Page()));			                
 		}
 	}
