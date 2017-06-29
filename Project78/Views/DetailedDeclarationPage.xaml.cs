@@ -30,11 +30,9 @@ namespace Project78.Views
 
                 if (answer) //if the user clicks on yes
                 {
-                    //delete request
-                    Navigation.PushModalAsync(new Project78Page());
+                    var response = new APIService().DeleteRequest(declaration.ID, "/declarations/");
+                    await Navigation.PushModalAsync(new Project78Page());
                 }
-                //await Navigation.PushAsync(new WaitPage());
-                var test = "l";
             }));
 
 

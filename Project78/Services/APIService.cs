@@ -61,6 +61,12 @@ namespace Project78
         public HttpResponseMessage PostRequest(HttpContent content, string endpoint)
         {
             var response = client.PostAsync(endpoint, content).Result;
+            return response;
+        }
+
+        public HttpResponseMessage DeleteRequest(int id, string endpoint)
+        {
+            var response = client.DeleteAsync(endpoint + id).Result;
 
             return response;
         }
