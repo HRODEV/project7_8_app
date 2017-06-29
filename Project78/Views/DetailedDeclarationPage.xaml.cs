@@ -15,14 +15,8 @@ namespace Project78.Views
 	{
 		private DeclarationViewModel vm;
 
-        //async void OnAlertYesNoClicked(object sender, EventArgs e)
-        //{
-
-        //}
-
         public DetailedDeclarationPage(Declaration declaration)
 		{
-
             ToolbarItems.Add(new ToolbarItem("Delete", null, async () =>
             {
                 var answer = await DisplayAlert("", "Do you want to delete this declaration?", "Yes", "No");
@@ -34,7 +28,6 @@ namespace Project78.Views
                     await Navigation.PushModalAsync(new Project78Page());
                 }
             }));
-
 
             if (declaration.ID != 0)
 			{
