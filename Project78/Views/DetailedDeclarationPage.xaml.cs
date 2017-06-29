@@ -17,16 +17,10 @@ namespace Project78.Views
 
         public DetailedDeclarationPage(Declaration declaration)
 		{
-            ToolbarItems.Add(new ToolbarItem("Delete", null, async () =>
+            ToolbarItems.Add(new ToolbarItem("Back", null, async () =>
             {
-                var answer = await DisplayAlert("", "Do you want to delete this declaration?", "Yes", "No");
 
-                if (answer) //if the user clicks on yes
-                {
-                    //var response = new APIService().DeleteRequest(declaration.ID, "/declarations/");
-                    await Navigation.PushModalAsync(new NavigationPage(new Project78Page()));
-                }
-            }));
+            await Navigation.PushModalAsync(new NavigationPage(new Project78Page()));
 
             if (declaration.ID != 0)
 			{

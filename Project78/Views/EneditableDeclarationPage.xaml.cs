@@ -22,7 +22,7 @@ namespace Project78.Views
 
                 if (answer) //if the user clicks on yes
                 {
-                    //var response = new APIService().DeleteRequest(declaration.ID, "/declarations/");
+                    var response = new APIService().DeleteRequest(declaration.ID, "/declarations/");
                     await Navigation.PushModalAsync(new NavigationPage(new Project78Page()));
                 }
             }));
