@@ -17,6 +17,7 @@ namespace Project78.Views
 
 		public DetailedDeclarationPage(Declaration declaration)
 		{
+			
 			if (declaration.ID != 0)
 			{
 				vm = new DeclarationViewModel(declaration.ID);

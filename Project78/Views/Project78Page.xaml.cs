@@ -22,14 +22,15 @@ namespace Project78
 
 			ToolbarItems.Add(new ToolbarItem("Add", null, async () =>
 			{
-                await Navigation.PushAsync(new WaitPage());
+				var wait = new WaitPage();
                 var photo = await Plugin.Media.CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions() { });
-
+				await Navigation.PushAsync(wait);
                 if (photo != null)
                 {
                     PhotoImage.Source = ImageSource.FromStream(() => { return photo.GetStream(); });
                     Declaration response = new APIService().PostImage(new ByteArrayContent(StreamToByteArray(photo.GetStream())), GenerateFileName());
                     await Navigation.PushAsync(new DetailedDeclarationPage(response));
+					Navigation.RemovePage(wait);
                 }
             }));
         }
