@@ -25,12 +25,12 @@ namespace Project78
 			{
 				var wait = new WaitPage();
                 var photo = await Plugin.Media.CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions() { });
-				await Navigation.PushAsync(wait);
                 if (photo != null)
                 {
+					await Navigation.PushAsync(wait);
                     PhotoImage.Source = ImageSource.FromStream(() => { return photo.GetStream(); });
-                    Debug.WriteLine(new APIService().PostImage(new ByteArrayContent(StreamToByteArray(photo.GetStream())), GenerateFileName()));
-                    //await Navigation.PushAsync(new DetailedDeclarationPage(response));
+                    var response = new APIService().PostImage(new ByteArrayContent(StreamToByteArray(photo.GetStream())), GenerateFileName());
+                    await Navigation.PushAsync(new DetailedDeclarationPage(response));
 					Navigation.RemovePage(wait);
                 }
             }));
@@ -39,10 +39,7 @@ namespace Project78
         private string GenerateFileName()
         {
             Random rnd = new Random();
-            string fileName = "";
-            while (fileName.Length < 7)
-                fileName += rnd.Next(10).ToString();
-            return fileName + ".jpg";
+			return rnd.Next(10000000, 99999999).ToString() + ".jpg";
         }
 
         private byte[] StreamToByteArray(Stream stream)

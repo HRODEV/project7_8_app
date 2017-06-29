@@ -15,23 +15,10 @@ namespace Project78.Views
 	{
 		private DeclarationViewModel vm;
 
-        public DetailedDeclarationPage(Declaration declaration)
+		public DetailedDeclarationPage(Declaration declaration)
 		{
-            ToolbarItems.Add(new ToolbarItem("Back", null, async () =>
-            {
-
-            await Navigation.PushModalAsync(new NavigationPage(new Project78Page()));
-
-            if (declaration.ID != 0)
-			{
-				vm = new DeclarationViewModel(declaration.ID);
-				this.BindingContext = vm;
-			}
-			else 
-			{
-				vm = new DeclarationViewModel(declaration);
-				this.BindingContext = vm;
-			}
+			vm = new DeclarationViewModel(declaration);
+			this.BindingContext = vm;
 			vm.Navigation = Navigation;
 			InitializeComponent();
 		}
