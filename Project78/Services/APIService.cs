@@ -57,7 +57,7 @@ namespace Project78
 
 		public Image GetImage(int id)
 		{
-			return RequestJson<Image>("/declarations/" + id.ToString());
+			return RequestJson<Image>("/receipt/" + id.ToString() + "/image");
 		}
 
         public HttpResponseMessage PostRequest(HttpContent content, string endpoint)

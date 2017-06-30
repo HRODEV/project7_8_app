@@ -286,3 +286,5 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
+Project78/Views/DetailedDeclarationPage.xaml.cs
+Project78/Services/APIService.cs

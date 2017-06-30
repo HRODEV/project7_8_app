@@ -28,7 +28,7 @@ namespace Project78.Views
 
             vm = new DeclarationViewModel(declaration.ID);
             this.BindingContext = vm;
-
+			vm.Declaration.Date = vm.Declaration.Date.Split(' ').First();
             vm.Navigation = Navigation;
             InitializeComponent();
         }
