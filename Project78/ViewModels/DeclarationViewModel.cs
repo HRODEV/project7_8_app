@@ -56,7 +56,7 @@ namespace Project78
 
 		private void Post()
 		{
-			Debug.WriteLine(new APIService().PostRequest(new StringContent(JsonConvert.SerializeObject(Declaration), Encoding.UTF8, "application/json"), "/declarations").Content.ReadAsStringAsync().Result);
+			var x = new APIService().PostRequest(new StringContent(JsonConvert.SerializeObject(Declaration), Encoding.UTF8, "application/json"), "/declarations").Content.ReadAsStringAsync().Result;
 			Navigation.PushModalAsync(new NavigationPage(new Project78Page()));			                
 		}
 	}

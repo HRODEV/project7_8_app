@@ -46,7 +46,6 @@ namespace Project78
             testcontent.Add(content, "image", filename);
 
             HttpResponseMessage response = client.PostAsync("/receipt", testcontent).Result;
-			Debug.WriteLine(response.Content.ReadAsStringAsync());
 			if (response.IsSuccessStatusCode)
 			{
 				string responseBody = response.Content.ReadAsStringAsync().Result;

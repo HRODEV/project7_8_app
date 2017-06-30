@@ -26,7 +26,7 @@ namespace Project78.Views
 			vm = new DeclarationViewModel(declaration);
 			this.BindingContext = vm;
 			vm.Navigation = Navigation;
-			Image.Source = new APIService().GetImage(declaration.ReceiptID).Source;
+			//Image.Source = new APIService().GetImage(declaration.ReceiptID).Source;
 			InitializeComponent();
 		}
 	}

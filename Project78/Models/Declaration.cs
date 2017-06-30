@@ -54,7 +54,7 @@ namespace Project78.Models
 			set;
 		}
 
-		[JsonProperty(PropertyName = "ReiceptID")]
+		[JsonProperty(PropertyName = "ReceiptID")]
 		public int ReceiptID
 		{
 			get;
