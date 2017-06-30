@@ -25,7 +25,7 @@ namespace Project78
 		{
 			updateCommand = new Command(Post);
 			this.declaration = declaration;
-			this.declaration.Date = DateTime.Now;
+			this.declaration.Date = DateTime.Now.ToString();
 		}
 
 		private void GetData(int id)

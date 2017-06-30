@@ -27,7 +27,7 @@ namespace Project78.Models
 		}
 
 		[JsonProperty(PropertyName = "date")]
-		public DateTime Date
+		public string Date
 		{
 			get;
 			set;
