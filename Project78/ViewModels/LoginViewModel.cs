@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using Project78.Views;
+using System.Diagnostics;
 
 namespace Project78.ViewModels
 {
@@ -28,7 +29,7 @@ namespace Project78.ViewModels
             });
         }
 
-        public ICommand NavigateToDeclarations { get; protected set; }
+        public Command NavigateToDeclarations { get; protected set; }
 
         public string Email
         {

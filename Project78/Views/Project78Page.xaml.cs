@@ -5,6 +5,7 @@ using Project78.Models;
 using System.Net.Http;
 using System;
 using System.IO;
+using System.Diagnostics;
 
 namespace Project78
 {
@@ -22,13 +23,15 @@ namespace Project78
 
 			ToolbarItems.Add(new ToolbarItem("Add", null, async () =>
 			{
+				var wait = new WaitPage();
                 var photo = await Plugin.Media.CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions() { });
-
                 if (photo != null)
                 {
+					await Navigation.PushAsync(wait);
                     PhotoImage.Source = ImageSource.FromStream(() => { return photo.GetStream(); });
-                    Declaration response = new APIService().PostImage(new ByteArrayContent(StreamToByteArray(photo.GetStream())), GenerateFileName());
+                    var response = new APIService().PostImage(new ByteArrayContent(StreamToByteArray(photo.GetStream())), GenerateFileName());
                     await Navigation.PushAsync(new DetailedDeclarationPage(response));
+					Navigation.RemovePage(wait);
                 }
             }));
         }
@@ -36,10 +39,7 @@ namespace Project78
         private string GenerateFileName()
         {
             Random rnd = new Random();
-            string fileName = "";
-            while (fileName.Length < 7)
-                fileName += rnd.Next(10).ToString();
-            return fileName + ".jpg";
+			return rnd.Next(10000000, 99999999).ToString() + ".jpg";
         }
 
         private byte[] StreamToByteArray(Stream stream)
@@ -55,7 +55,7 @@ namespace Project78
 		{
 			ListView lv = (ListView)sender;
 			Declaration item = (Declaration)lv.SelectedItem;
-			await Navigation.PushAsync(new DetailedDeclarationPage(item));
+			await Navigation.PushAsync(new EneditableDeclarationPage(item));
 		}
 	}
 }

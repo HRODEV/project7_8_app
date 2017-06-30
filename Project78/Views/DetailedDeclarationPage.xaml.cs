@@ -6,7 +6,7 @@ using Project78.Models;
 
 
 using Xamarin.Forms;
-
+using System.Diagnostics;
 
 namespace Project78.Views
 {
@@ -17,16 +17,8 @@ namespace Project78.Views
 
 		public DetailedDeclarationPage(Declaration declaration)
 		{
-			if (declaration.ID != 0)
-			{
-				vm = new DeclarationViewModel(declaration.ID);
-				this.BindingContext = vm;
-			}
-			else 
-			{
-				vm = new DeclarationViewModel(declaration);
-				this.BindingContext = vm;
-			}
+			vm = new DeclarationViewModel(declaration);
+			this.BindingContext = vm;
 			vm.Navigation = Navigation;
 			InitializeComponent();
 		}

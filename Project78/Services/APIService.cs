@@ -9,6 +9,7 @@ using Microsoft.VisualBasic;
 using System.Text;
 using Xamarin.Forms;
 using Project78.Models;
+using System.Diagnostics;
 
 namespace Project78
 {
@@ -45,6 +46,7 @@ namespace Project78
             testcontent.Add(content, "image", filename);
 
             HttpResponseMessage response = client.PostAsync("/receipt", testcontent).Result;
+			Debug.WriteLine(response.Content.ReadAsStringAsync());
 			if (response.IsSuccessStatusCode)
 			{
 				string responseBody = response.Content.ReadAsStringAsync().Result;
@@ -61,6 +63,12 @@ namespace Project78
         public HttpResponseMessage PostRequest(HttpContent content, string endpoint)
         {
             var response = client.PostAsync(endpoint, content).Result;
+            return response;
+        }
+
+        public HttpResponseMessage DeleteRequest(int id, string endpoint)
+        {
+            var response = client.DeleteAsync(endpoint + id).Result;
 
             return response;
         }
