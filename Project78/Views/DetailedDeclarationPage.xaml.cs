@@ -15,7 +15,13 @@ namespace Project78.Views
 	{
 		private DeclarationViewModel vm;
 
-		public DetailedDeclarationPage(Declaration declaration)
+        DatePicker datePicker = new DatePicker
+        {
+            Format = "D",
+            VerticalOptions = LayoutOptions.CenterAndExpand
+        };
+
+        public DetailedDeclarationPage(Declaration declaration)
 		{
 			vm = new DeclarationViewModel(declaration);
 			this.BindingContext = vm;

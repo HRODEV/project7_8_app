@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Project78.Views.DetailedDeclarationPage">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Project78.Views.DetailedDeclarationPage" xmlns:sys="clr-namespace:System;assembly=mscorlib">
 	<ContentPage.Content>
         <Grid>
 			<Grid.ColumnDefinitions>
@@ -22,8 +22,25 @@
 			<Label Grid.Row="2" Grid.Column="0" Text="VAT" VerticalOptions="Center"/>
 			<Entry x:Name = "Vat" Grid.Row = "2" Grid.Column = "1" VerticalOptions="Center" Text="{Binding Path=Declaration.VATPrice, Mode=TwoWay}"/>
 			<Label Grid.Row="3" Grid.Column="0" Text="Date" VerticalOptions="Center"/>
-			<Entry x:Name = "Date" Grid.Row = "3" Grid.Column = "1" VerticalOptions="Center" Text="{Binding Path=Declaration.Date, Mode=TwoWay}"/>
-			<Label Grid.Row="4" Grid.Column="0" Text="Description" VerticalOptions="Center"/>
+			<!--<Entry x:Name = "Date" Grid.Row = "3" Grid.Column = "1" VerticalOptions="Center" Text="{Binding Path=Declaration.Date, Mode=TwoWay}"/>-->
+            <DatePicker VerticalOptions="CenterAndExpand" Date="{x:Static sys:DateTime.Now}" Grid.Row="3" Grid.Column="1">
+                <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
+                <DatePicker.MinimumDate>
+                    <sys:DateTime x:FactoryMethod="Parse">
+                        <x:Arguments>
+                            <x:String>Jan 1 2000</x:String>
+                        </x:Arguments>
+                    </sys:DateTime>
+                </DatePicker.MinimumDate>
+                <DatePicker.MaximumDate>
+                    <sys:DateTime x:FactoryMethod="Parse">
+                        <x:Arguments>
+                            <x:String>Dec 31 2050</x:String>
+                        </x:Arguments>
+                    </sys:DateTime>
+                </DatePicker.MaximumDate>
+            </DatePicker>
+            <Label Grid.Row="4" Grid.Column="0" Text="Description" VerticalOptions="Center"/>
 			<Entry x:Name = "Description" Grid.Row = "4" Grid.Column = "1" VerticalOptions="Center" Text="{Binding Path=Declaration.Description, Mode=TwoWay}"/>
 			<Image x:Name = "Image" Grid.Row = "5" Grid.ColumnSpan="2" VerticalOptions="Center" Source="hond.jpg"/>
 			<Button x:Name="submitButton" Grid.Row = "6" Text="Submit" Grid.ColumnSpan="2" Command="{Binding UpdateCommand}"/>

@@ -32,7 +32,9 @@ namespace Project78.ViewModels
                 var content = new StringContent(jsonUser, Encoding.UTF8, "application/json");           
                 HttpResponseMessage post = _api.PostRequest(content, "/user");
 
-                if (post.IsSuccessStatusCode)
+                Debug.WriteLine(post.Content.ReadAsStringAsync().Result);
+
+                if (post.IsSuccessStatusCode)   
                     Navigation.PushModalAsync(new NavigationPage(new StartUpPage()));
             });
         }
