@@ -15,12 +15,12 @@ namespace Project78
 		public DeclarationsViewModel()
 		{
 			declarations = new ObservableCollection<Declaration>();
-			GetData();
+			LoadData();
 		}
 
-		public void GetData()
+		public async void LoadData()
 		{
-			declarations = new ObservableCollection<Declaration>(new APIService().getDeclarations());
+			declarations = new ObservableCollection<Declaration>(await new APIService().GetDeclarationsAsync());
         }
 
 		public ObservableCollection<Declaration> Declarations

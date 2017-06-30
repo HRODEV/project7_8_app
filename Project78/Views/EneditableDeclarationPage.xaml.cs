@@ -21,7 +21,7 @@ namespace Project78.Views
                 var answer = await DisplayAlert("", "Do you want to delete this declaration?", "Yes", "No");
                 if (answer)
                 {
-                    var response = new APIService().DeleteRequest(declaration.ID, "/declarations/");
+                    var response = new APIService().DeleteRequestAsync(declaration.ID, "/declarations/");
                     await Navigation.PushModalAsync(new NavigationPage(new Project78Page()));
                 }
             }));

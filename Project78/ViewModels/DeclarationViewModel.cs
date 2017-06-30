@@ -28,9 +28,9 @@ namespace Project78
 			this.declaration.Date = DateTime.Now.ToString();
 		}
 
-		private void GetData(int id)
+		private async void GetData(int id)
 		{
-			Declaration = new APIService().getDeclaration(id);
+			Declaration = await new APIService().GetDeclarationAsync(id);
 		}
 
 		public Declaration Declaration
@@ -48,16 +48,20 @@ namespace Project78
 
 		public Command UpdateCommand { get { return updateCommand;} }
 
-		private void Patch()
+		private async void Patch()
 		{
-			Debug.WriteLine(new APIService().PatchRequest(new StringContent(JsonConvert.SerializeObject(Declaration), Encoding.UTF8, "application/json"), "/declarations/" + declaration.ID.ToString()).Content.ReadAsStringAsync().Result);
-			Navigation.PushModalAsync(new NavigationPage(new Project78Page()));
+            var content = await (await new APIService()
+                .PatchRequestAsync(new StringContent(JsonConvert.SerializeObject(Declaration), Encoding.UTF8, "application/json"), "/declarations/" + declaration.ID.ToString()))
+                .Content.ReadAsStringAsync();
+
+            Debug.WriteLine(content);
+			await Navigation.PushModalAsync(new NavigationPage(new Project78Page()));
 		}
 
-		private void Post()
+		private async void Post()
 		{
-			var x = new APIService().PostRequest(new StringContent(JsonConvert.SerializeObject(Declaration), Encoding.UTF8, "application/json"), "/declarations").Content.ReadAsStringAsync().Result;
-			Navigation.PushModalAsync(new NavigationPage(new Project78Page()));			                
+            await new APIService().PostRequestAsync(new StringContent(JsonConvert.SerializeObject(Declaration), Encoding.UTF8, "application/json"), "/declarations");
+			await Navigation.PushModalAsync(new NavigationPage(new Project78Page()));			                
 		}
 	}
 }

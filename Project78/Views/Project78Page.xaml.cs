@@ -30,7 +30,7 @@ namespace Project78
                 {
 					await Navigation.PushAsync(wait);
                     PhotoImage.Source = ImageSource.FromStream(() => { return photo.GetStream();});
-                    var response = new APIService().PostImage(new ByteArrayContent(StreamToByteArray(photo.GetStream())), GenerateFileName());
+                    var response = new APIService().PostImageAsync(new ByteArrayContent(StreamToByteArray(photo.GetStream())), GenerateFileName());
                     await Navigation.PushAsync(new DetailedDeclarationPage(response));
 					Navigation.RemovePage(wait);
 					photo.Dispose();
