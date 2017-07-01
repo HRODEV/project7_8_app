@@ -1,7 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26430.14
-MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project78", "Project78\Project78.csproj", "{F414082E-0AD2-4E8B-AB4B-2279A0411010}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project78.iOS", "iOS\Project78.iOS.csproj", "{F28E8C0D-EF3A-4315-BFE0-8DB662762C6E}"
