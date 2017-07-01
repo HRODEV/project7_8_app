@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace App2.Helpers
+namespace Project78.Helpers
 {
     public class MessagingCenterAlert
     {

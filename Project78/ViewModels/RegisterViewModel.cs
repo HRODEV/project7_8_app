@@ -26,20 +26,20 @@ namespace Project78.ViewModels
         public RegisterViewModel()
         {
             _navigator = new Navigator();
-            CreateAccountCommand = new Command(() =>
+            CreateAccountCommand = new Command(async () =>
             {
                 var jsonUser = JsonConvert.SerializeObject(new User(Email, FirstName, LastName, FirstPassword));
                 var content = new StringContent(jsonUser, Encoding.UTF8, "application/json");           
-                HttpResponseMessage post = _api.PostRequestAsync(content, "/user");
+                HttpResponseMessage post = await _api.PostRequestAsync(content, "/user");
 
-                Debug.WriteLine(post.Content.ReadAsStringAsync().Result);
+                Debug.WriteLine(await post.Content.ReadAsStringAsync());
 
                 if (post.IsSuccessStatusCode)   
-                    Navigation.PushModalAsync(new NavigationPage(new StartUpPage()));
+                    await Navigation.PushModalAsync(new NavigationPage(new StartUpPage()));
             });
         }
 
-        public ICommand CreateAccountCommand { get; protected set; } //TO DO: create the command in the constructor
+        public ICommand CreateAccountCommand { get; protected set; }
 
         public string FirstPassword
         {

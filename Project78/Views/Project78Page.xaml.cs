@@ -13,11 +13,12 @@ namespace Project78
 	{
         private readonly INavigationService _navigationService = new Navigator();
         private Image PhotoImage;
+        private readonly DeclarationsViewModel viewModel;
 
         public Project78Page()
 		{
 			PhotoImage = new Image();
-			this.BindingContext = new DeclarationsViewModel();
+			BindingContext = viewModel = new DeclarationsViewModel();
 			InitializeComponent();
 			Title = "Declarations";
 
@@ -30,12 +31,18 @@ namespace Project78
                 {
 					await Navigation.PushAsync(wait);
                     PhotoImage.Source = ImageSource.FromStream(() => { return photo.GetStream();});
-                    var response = new APIService().PostImageAsync(new ByteArrayContent(StreamToByteArray(photo.GetStream())), GenerateFileName());
+                    var response = await new APIService().PostImageAsync(new ByteArrayContent(StreamToByteArray(photo.GetStream())), GenerateFileName());
                     await Navigation.PushAsync(new DetailedDeclarationPage(response));
 					Navigation.RemovePage(wait);
 					photo.Dispose();
                 }
             }));
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            viewModel.LoadDataCommand.Execute(null);
         }
 
         private string GenerateFileName()
