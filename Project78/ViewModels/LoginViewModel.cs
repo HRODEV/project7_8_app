@@ -27,7 +27,7 @@ namespace Project78.ViewModels
             //IsBusy = true;
             var authData = string.Format("{0}:{1}", Email, Password);
             var authHeaderValue = Convert.ToBase64String(Encoding.UTF8.GetBytes(authData));
-            var authCall = _api.getAuthenticateUser(authHeaderValue);
+            var authCall = _api.GetAuthenticateUser(authHeaderValue);
 
             if (authCall != null)
                 Navigation.PushModalAsync(new NavigationPage(new Project78Page()));

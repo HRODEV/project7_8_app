@@ -24,7 +24,7 @@ namespace Project78
 
         public async Task<IEnumerable<Declaration>> GetDeclarationsAsync() => await RequestJson<List<Declaration>>("/declarations");
 
-        public User getAuthenticateUser(string authenticationHeader)
+        public User GetAuthenticateUser(string authenticationHeader)
         {
             client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", authenticationHeader);
 
@@ -35,9 +35,10 @@ namespace Project78
         public async Task<Declaration> GetDeclarationAsync(int id) => await RequestJson<Declaration>("/declarations/" + id.ToString());
         public async Task<Declaration> PostImageAsync(HttpContent content, string filename)
         {
-            var testcontent = new MultipartFormDataContent();
-            testcontent.Add(content, "image", filename);
-
+            var testcontent = new MultipartFormDataContent
+            {
+                { content, "image", filename }
+            };
             HttpResponseMessage response = await client.PostAsync("/receipt", testcontent);
             if (response.IsSuccessStatusCode)
             {
