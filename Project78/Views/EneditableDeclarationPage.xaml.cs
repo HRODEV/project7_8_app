@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Project78.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Project78.ViewModels;
 
 namespace Project78.Views
 {

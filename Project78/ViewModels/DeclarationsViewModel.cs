@@ -7,7 +7,7 @@ using Xamarin.Forms;
 using Project78.Models;
 using System.Threading.Tasks;
 
-namespace Project78
+namespace Project78.ViewModels
 {
 	public class DeclarationsViewModel : ViewModelBase
 	{

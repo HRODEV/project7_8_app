@@ -6,6 +6,8 @@ using System.Net.Http;
 using System;
 using System.IO;
 using System.Diagnostics;
+using Project78.ViewModels;
+using System.Threading.Tasks;
 
 namespace Project78
 {
@@ -30,8 +32,8 @@ namespace Project78
                 if (photo != null)
                 {
 					await Navigation.PushAsync(wait);
-                    PhotoImage.Source = ImageSource.FromStream(() => { return photo.GetStream();});
-                    var response = await new APIService().PostImageAsync(new ByteArrayContent(StreamToByteArray(photo.GetStream())), GenerateFileName());
+                    PhotoImage.Source = ImageSource.FromStream(() => photo.GetStream());
+                    var response = await new APIService().PostImageAsync(new ByteArrayContent(await StreamToByteArrayAsync(photo.GetStream())), GenerateFileName());
                     await Navigation.PushAsync(new DetailedDeclarationPage(response));
 					Navigation.RemovePage(wait);
 					photo.Dispose();
@@ -48,14 +50,15 @@ namespace Project78
         private string GenerateFileName()
         {
             Random rnd = new Random();
+            //should be done serverside
 			return rnd.Next(10000000, 99999999).ToString() + ".jpg";
         }
 
-        private byte[] StreamToByteArray(Stream stream)
+        private async Task<byte[]> StreamToByteArrayAsync(Stream stream)
         {
             using (var memoryStream = new MemoryStream())
             {
-                stream.CopyTo(memoryStream);
+                await stream.CopyToAsync(memoryStream);
                 return memoryStream.ToArray();
             }
         }

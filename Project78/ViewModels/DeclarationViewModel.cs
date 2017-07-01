@@ -6,7 +6,7 @@ using System.Text;
 using System.Diagnostics;
 using Project78.Models;
 
-namespace Project78
+namespace Project78.ViewModels
 {
 	public class DeclarationViewModel : ViewModelBase
 	{
@@ -35,15 +35,8 @@ namespace Project78
 
 		public Declaration Declaration
 		{
-			get
-			{
-				return declaration;
-			}
-			set
-			{
-				declaration = value;
-				OnPropertyChanged("Declaration");
-			}
+            get => declaration;
+            set => SetProperty(ref declaration, value);
 		}
 
 		public Command UpdateCommand { get { return updateCommand;} }

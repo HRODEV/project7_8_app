@@ -9,14 +9,15 @@ using Project78.Views;
 
 namespace Project78.ViewModels
 {
+    // Why not use the `ViewModelBase` ?
     class StartUpViewModel
     {
         public INavigation Navigation;
 
         public StartUpViewModel()
         {
-            NavigateToLogin = new Command(() => Navigation.PushAsync(new LoginPage()));
-            NavigateToRegister = new Command(() => Navigation.PushAsync(new RegisterPage()));
+            NavigateToLogin = new Command(async () => await Navigation.PushAsync(new LoginPage()));
+            NavigateToRegister = new Command(async () => await Navigation.PushAsync(new RegisterPage()));
         }
 
         public ICommand NavigateToLogin { get; protected set; }
