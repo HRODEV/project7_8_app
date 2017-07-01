@@ -11,7 +11,7 @@ using Xamarin.Forms;
 using Project78.Models;
 using System.Diagnostics;
 
-namespace Project78
+namespace Project78.Services
 {
     public class APIService
     {

@@ -7,6 +7,7 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using Project78.Views;
 using System.Diagnostics;
+using Project78.Services;
 
 namespace Project78.ViewModels
 {

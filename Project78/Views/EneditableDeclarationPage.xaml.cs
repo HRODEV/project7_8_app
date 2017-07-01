@@ -7,6 +7,7 @@ using Project78.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Project78.ViewModels;
+using Project78.Services;
 
 namespace Project78.Views
 {
@@ -22,14 +23,14 @@ namespace Project78.Views
                 var answer = await DisplayAlert("", "Do you want to delete this declaration?", "Yes", "No");
                 if (answer)
                 {
-                    var response = new APIService().DeleteRequestAsync(declaration.ID, "/declarations/");
+                    var response = await new APIService().DeleteRequestAsync(declaration.ID, "/declarations/");
                     await Navigation.PushModalAsync(new NavigationPage(new Project78Page()));
                 }
             }));
 
             vm = new DeclarationViewModel(declaration.ID);
             this.BindingContext = vm;
-			vm.Declaration.Date = vm.Declaration.Date.Split(' ').First();
+			vm.Declaration.Date = vm?.Declaration?.Date?.Split(' ')?.First() ?? string.Empty;
             vm.Navigation = Navigation;
             InitializeComponent();
         }

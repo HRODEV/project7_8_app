@@ -65,9 +65,8 @@ namespace Project78
 
         async void OnItemSelected(object sender, ItemTappedEventArgs e)
 		{
-			ListView lv = (ListView)sender;
-			Declaration item = (Declaration)lv.SelectedItem;
-			await Navigation.PushAsync(new EneditableDeclarationPage(item));
+            Declaration item = (sender as ListView)?.SelectedItem as Declaration;
+            await Navigation.PushAsync(new EneditableDeclarationPage(item));
 		}
 	}
 }
