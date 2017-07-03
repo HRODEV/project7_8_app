@@ -5,35 +5,31 @@ using System.ComponentModel;
 using Project78.Services;
 using Xamarin.Forms;
 using Project78.Models;
+using System.Threading.Tasks;
 
-namespace Project78
+namespace Project78.ViewModels
 {
 	public class DeclarationsViewModel : ViewModelBase
 	{
 		private ObservableCollection<Declaration> declarations;
+        public Command LoadDataCommand { get; }
 
-		public DeclarationsViewModel()
+        public DeclarationsViewModel()
 		{
 			declarations = new ObservableCollection<Declaration>();
-			GetData();
+			LoadDataCommand = new Command(async () => await LoadData());
 		}
 
-		public void GetData()
+		public async Task LoadData()
 		{
-			declarations = new ObservableCollection<Declaration>(new APIService().getDeclarations());
+            //should you create a new Collection?
+			Declarations = new ObservableCollection<Declaration>(await new APIService().GetDeclarationsAsync());
         }
 
 		public ObservableCollection<Declaration> Declarations
 		{
-			get
-			{
-				return declarations;
-			}
-			set
-			{
-				declarations = value;
-				OnPropertyChanged("Declarations");
-			}
+            get => declarations;
+            set => SetProperty(ref declarations, value);
 		}
 	}
 }

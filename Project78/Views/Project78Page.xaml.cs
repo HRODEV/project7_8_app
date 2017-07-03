@@ -6,6 +6,9 @@ using System.Net.Http;
 using System;
 using System.IO;
 using System.Diagnostics;
+using Project78.ViewModels;
+using System.Threading.Tasks;
+using Plugin.ImageResizer;
 
 namespace Project78
 {
@@ -13,11 +16,11 @@ namespace Project78
 	{
         private readonly INavigationService _navigationService = new Navigator();
         private Image PhotoImage;
+        private readonly DeclarationsViewModel viewModel;
 
         public Project78Page()
 		{
-			PhotoImage = new Image();
-			this.BindingContext = new DeclarationsViewModel();
+			BindingContext = viewModel = new DeclarationsViewModel();
 			InitializeComponent();
 			Title = "Declarations";
 
@@ -25,12 +28,12 @@ namespace Project78
 			{
 				var wait = new WaitPage();
 
-				var photo = await Plugin.Media.CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions() { });
+				var photo = await Plugin.Media.CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions() { CompressionQuality = 70, PhotoSize = Plugin.Media.Abstractions.PhotoSize.Medium});
                 if (photo != null)
                 {
 					await Navigation.PushAsync(wait);
-                    PhotoImage.Source = ImageSource.FromStream(() => { return photo.GetStream();});
-                    var response = new APIService().PostImage(new ByteArrayContent(StreamToByteArray(photo.GetStream())), GenerateFileName());
+                    var resizedImage = await CrossImageResizer.Current.ResizeImageWithAspectRatioAsync(await StreamToByteArrayAsync(photo.GetStream()), 1080, 1920);
+                    var response = await new APIService().PostImageAsync(new ByteArrayContent(resizedImage), GenerateFileName());
                     await Navigation.PushAsync(new DetailedDeclarationPage(response));
 					Navigation.RemovePage(wait);
 					photo.Dispose();
@@ -38,26 +41,32 @@ namespace Project78
             }));
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            viewModel.LoadDataCommand.Execute(null);
+        }
+
         private string GenerateFileName()
         {
             Random rnd = new Random();
+            //should be done serverside
 			return rnd.Next(10000000, 99999999).ToString() + ".jpg";
         }
 
-        private byte[] StreamToByteArray(Stream stream)
+        private async Task<byte[]> StreamToByteArrayAsync(Stream stream)
         {
             using (var memoryStream = new MemoryStream())
             {
-                stream.CopyTo(memoryStream);
+                await stream.CopyToAsync(memoryStream);
                 return memoryStream.ToArray();
             }
         }
 
         async void OnItemSelected(object sender, ItemTappedEventArgs e)
 		{
-			ListView lv = (ListView)sender;
-			Declaration item = (Declaration)lv.SelectedItem;
-			await Navigation.PushAsync(new EneditableDeclarationPage(item));
+            Declaration item = (sender as ListView)?.SelectedItem as Declaration;
+            await Navigation.PushAsync(new EneditableDeclarationPage(item));
 		}
 	}
 }

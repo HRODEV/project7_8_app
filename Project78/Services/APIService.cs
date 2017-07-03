@@ -11,7 +11,7 @@ using Xamarin.Forms;
 using Project78.Models;
 using System.Diagnostics;
 
-namespace Project78
+namespace Project78.Services
 {
     public class APIService
     {
@@ -22,12 +22,9 @@ namespace Project78
         
         private HttpClient client;
 
-        public IEnumerable<Declaration> getDeclarations()
-        {
-            return RequestJson<List<Declaration>>("/declarations");
-        }
+        public async Task<IEnumerable<Declaration>> GetDeclarationsAsync() => await RequestJson<List<Declaration>>("/declarations");
 
-        public User getAuthenticateUser(string authenticationHeader)
+        public User GetAuthenticateUser(string authenticationHeader)
         {
             client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", authenticationHeader);
 
@@ -35,59 +32,41 @@ namespace Project78
             return new User("A", "b", "c", "d");
         }
 
-		public Declaration getDeclaration(int id)
-		{
-			return RequestJson<Declaration>("/declarations/" + id.ToString());
-		}
-
-        public Declaration PostImage(HttpContent content, string filename)
+        public async Task<Declaration> GetDeclarationAsync(int id) => await RequestJson<Declaration>("/declarations/" + id.ToString());
+        public async Task<Declaration> PostImageAsync(HttpContent content, string filename)
         {
-            var testcontent = new MultipartFormDataContent();
-            testcontent.Add(content, "image", filename);
-
-            HttpResponseMessage response = client.PostAsync("/receipt", testcontent).Result;
-			if (response.IsSuccessStatusCode)
-			{
-				string responseBody = response.Content.ReadAsStringAsync().Result;
-				return JsonConvert.DeserializeObject<Declaration>(responseBody);                              
-			}
-			return new Declaration();
+            var testcontent = new MultipartFormDataContent
+            {
+                { content, "image", filename }
+            };
+            HttpResponseMessage response = await client.PostAsync("/receipt", testcontent);
+            if (response.IsSuccessStatusCode)
+            {
+                string responseBody = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<Declaration>(responseBody);
+            }
+            // Why a emptyDeclaration on fail?
+            return new Declaration();
         }
 
-		public Image GetImage(int id)
-		{
-			return RequestJson<Image>("/receipt/" + id.ToString() + "/image");
-		}
-
-        public HttpResponseMessage PostRequest(HttpContent content, string endpoint)
+        public async Task<byte[]> GetImageAsync(int id) => await client.GetByteArrayAsync("/receipt/" + id.ToString() + "/image");
+ 
+        public async Task<HttpResponseMessage> PostRequestAsync(HttpContent content, string endpoint) => await client.PostAsync(endpoint, content);
+        public async Task<HttpResponseMessage> DeleteRequestAsync(int id, string endpoint) => await client.DeleteAsync(endpoint + id);
+        public async Task<HttpResponseMessage> PatchRequestAsync(HttpContent content, string endpoint)
         {
-            var response = client.PostAsync(endpoint, content).Result;
-            return response;
+            HttpRequestMessage request = new HttpRequestMessage(new HttpMethod("PATCH"), endpoint)
+            {
+                Content = content
+            };
+
+            return await client.SendAsync(request);
         }
 
-        public HttpResponseMessage DeleteRequest(int id, string endpoint)
+        private async Task<T> RequestJson<T>(string endpoint)
         {
-            var response = client.DeleteAsync(endpoint + id).Result;
-
-            return response;
-        }
-
-		public HttpResponseMessage PatchRequest(HttpContent content, string endpoint)
-		{
-			HttpRequestMessage request = new HttpRequestMessage(new HttpMethod("PATCH"), endpoint)
-			{
-				Content = content
-			};
-
-			var response = client.SendAsync(request).Result;
-
-            return response;
-		}
-
-        private T RequestJson<T>(string endpoint)
-        {
-            HttpResponseMessage responseshit = client.GetAsync(endpoint).Result;
-            string responseBody = responseshit.Content.ReadAsStringAsync().Result;
+            HttpResponseMessage responseshit = await client.GetAsync(endpoint);
+            string responseBody = await responseshit.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<T>(responseBody);
         }
 	}

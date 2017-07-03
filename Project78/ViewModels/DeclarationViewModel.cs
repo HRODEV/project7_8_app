@@ -5,13 +5,16 @@ using System.Net.Http;
 using System.Text;
 using System.Diagnostics;
 using Project78.Models;
+using Project78.Services;
+using System.IO;
 
-namespace Project78
+namespace Project78.ViewModels
 {
 	public class DeclarationViewModel : ViewModelBase
 	{
 		private Declaration declaration;
 		private Command updateCommand;
+        private ImageSource imageSource;
 		public INavigation Navigation;
 
 		public DeclarationViewModel(int id)
@@ -19,45 +22,50 @@ namespace Project78
 			updateCommand = new Command(Patch);
 			declaration = new Declaration();
 			GetData(id);
-		}
+            ImageSource = ImageSource.FromUri(new Uri($"http://37.139.12.76:8080/receipt/{id}/image"));
+        }
 
 		public DeclarationViewModel(Declaration declaration)
 		{
 			updateCommand = new Command(Post);
 			this.declaration = declaration;
 			this.declaration.Date = DateTime.Now.ToString();
-		}
+            ImageSource = ImageSource.FromUri(new Uri($"http://37.139.12.76:8080/receipt/{declaration.ReceiptID}/image"));
+        }
 
-		private void GetData(int id)
+        private async void GetData(int id)
 		{
-			Declaration = new APIService().getDeclaration(id);
+			Declaration = await new APIService().GetDeclarationAsync(id);
 		}
 
 		public Declaration Declaration
 		{
-			get
-			{
-				return declaration;
-			}
-			set
-			{
-				declaration = value;
-				OnPropertyChanged("Declaration");
-			}
+            get => declaration;
+            set => SetProperty(ref declaration, value);
 		}
+
+        public ImageSource ImageSource
+        {
+            get => imageSource;
+            set => SetProperty(ref imageSource, value);
+        }
 
 		public Command UpdateCommand { get { return updateCommand;} }
 
-		private void Patch()
+		private async void Patch()
 		{
-			Debug.WriteLine(new APIService().PatchRequest(new StringContent(JsonConvert.SerializeObject(Declaration), Encoding.UTF8, "application/json"), "/declarations/" + declaration.ID.ToString()).Content.ReadAsStringAsync().Result);
-			Navigation.PushModalAsync(new NavigationPage(new Project78Page()));
+            var content = await (await new APIService()
+                .PatchRequestAsync(new StringContent(JsonConvert.SerializeObject(Declaration), Encoding.UTF8, "application/json"), "/declarations/" + declaration.ID.ToString()))
+                .Content.ReadAsStringAsync();
+
+            Debug.WriteLine(content);
+			await Navigation.PushModalAsync(new NavigationPage(new Project78Page()));
 		}
 
-		private void Post()
+		private async void Post()
 		{
-			var x = new APIService().PostRequest(new StringContent(JsonConvert.SerializeObject(Declaration), Encoding.UTF8, "application/json"), "/declarations").Content.ReadAsStringAsync().Result;
-			Navigation.PushModalAsync(new NavigationPage(new Project78Page()));			                
+            await new APIService().PostRequestAsync(new StringContent(JsonConvert.SerializeObject(Declaration), Encoding.UTF8, "application/json"), "/declarations");
+			await Navigation.PushModalAsync(new NavigationPage(new Project78Page()));			                
 		}
 	}
 }

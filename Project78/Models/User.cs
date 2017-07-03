@@ -9,6 +9,9 @@ namespace Project78.Models
 {
     public class User
     {
+        // add empty constructor usefol for some frameworks
+        public User() { }
+
         public User(int id, string email, string fname, string lname, string pw)
         {
             ID = id;

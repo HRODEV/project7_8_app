@@ -1,15 +1,10 @@
 ﻿
+using Project78.Helpers;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-namespace Project78
+namespace Project78.ViewModels
 {
-	public class ViewModelBase : INotifyPropertyChanged
+	public class ViewModelBase : ObservableObject
 	{
-		public event PropertyChangedEventHandler PropertyChanged;
-
-		protected void OnPropertyChanged(string name)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-		}
 	}
 }

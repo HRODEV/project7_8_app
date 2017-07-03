@@ -7,6 +7,7 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using Project78.Views;
 using System.Diagnostics;
+using Project78.Services;
 
 namespace Project78.ViewModels
 {
@@ -27,7 +28,7 @@ namespace Project78.ViewModels
             //IsBusy = true;
             var authData = string.Format("{0}:{1}", Email, Password);
             var authHeaderValue = Convert.ToBase64String(Encoding.UTF8.GetBytes(authData));
-            var authCall = _api.getAuthenticateUser(authHeaderValue);
+            var authCall = _api.GetAuthenticateUser(authHeaderValue);
 
             if (authCall != null)
                 Navigation.PushModalAsync(new NavigationPage(new Project78Page()));
@@ -39,6 +40,7 @@ namespace Project78.ViewModels
         public bool IsBusy
         {
             get { return isBusy; }
+            // Why always set to FALSE??
             set
             {
                 isBusy = false;
@@ -50,28 +52,14 @@ namespace Project78.ViewModels
 
         public string Email
         {
-            get { return email; }
-            set
-            {
-                if (email != value)
-                {
-                    email = value;
-                    OnPropertyChanged("Email");
-                }
-            }
+            get => email;
+            set => SetProperty(ref email, value);
         }
 
         public string Password
         {
-            get { return password; }
-            set
-            {
-                if (password != value)
-                {
-                    password = value;
-                    OnPropertyChanged("Password");
-                }
-            }
+            get => password;
+            set => SetProperty(ref password, value);
         }
     }
 }

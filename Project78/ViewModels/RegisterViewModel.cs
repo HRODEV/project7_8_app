@@ -21,118 +21,62 @@ namespace Project78.ViewModels
         APIService _api = new APIService();
         public INavigation Navigation;
 
-        Action<string> action = (lol) => Debug.WriteLine(lol);
-
         public RegisterViewModel()
         {
             _navigator = new Navigator();
-            CreateAccountCommand = new Command(() =>
+            CreateAccountCommand = new Command(async () =>
             {
+                Debug.WriteLine(FirstName);
                 var jsonUser = JsonConvert.SerializeObject(new User(Email, FirstName, LastName, FirstPassword));
                 var content = new StringContent(jsonUser, Encoding.UTF8, "application/json");           
-                HttpResponseMessage post = _api.PostRequest(content, "/user");
+                HttpResponseMessage post = await _api.PostRequestAsync(content, "/user");
 
-                Debug.WriteLine(post.Content.ReadAsStringAsync().Result);
+                Debug.WriteLine(await post.Content.ReadAsStringAsync());
 
                 if (post.IsSuccessStatusCode)   
-                    Navigation.PushModalAsync(new NavigationPage(new StartUpPage()));
+                    await Navigation.PushModalAsync(new NavigationPage(new StartUpPage()));
             });
         }
 
-        public ICommand CreateAccountCommand { get; protected set; } //TO DO: create the command in the constructor
+        public ICommand CreateAccountCommand { get; protected set; }
 
         public string FirstPassword
         {
-            get { return fpassword; }
-            set
-            {
-                if (fpassword != value)
-                {
-                    fpassword = value;
-                    OnPropertyChanged("FirstPassword");
-                }
-            }
+            get => fpassword;
+            set => SetProperty(ref fpassword, value);
         }
 
         public string SecondPassword
         {
-            get { return spassword; }
-            set
-            {
-                if (spassword != value)
-                {
-                    spassword = value;
-                    OnPropertyChanged("SecondPassword");
-                }
-            }
+            get => spassword;
+            set => SetProperty(ref spassword, value);
         }
 
         public string FirstName
         {
-            get { return fname; }
-            set
-            {
-                if (fname != value)
-                {
-                    fname = value;
-                    OnPropertyChanged("FirstName");
-                }            
-            }
+            get => fname;
+            set => SetProperty(ref fname, value);
         }
 
         public string LastName
         {
-            get { return lname; }
-            set
-            {
-                if (lname != value)
-                {
-                    lname = value;
-                    OnPropertyChanged("LastName");
-                }
-            }
+            get => lname;
+            set => SetProperty(ref lname, value);
         }
 
         public string Email
         {
-            get { return email; }
-            set
-            {
-                if (email != value)
-                {
-                    email = value;
-                    OnPropertyChanged("Email");
-                }
-            }
+            get => email;
+            set => SetProperty(ref email, value);
         }
 
         private readonly INavigationService _navigator;
 
-        private string PasswordRegex(string password)
-        {
-            return "";
-        }
-
-        private string CheckIfPasswordsMatch(string password1, string password2)
-        {
-            return "";
-        }
-
-        private string FirstNameRegex(string firstname)
-        {
-            return "";
-        }
-
-        private string LastNameRegex(string lastname)
-        {
-            return "";
-        }
-
-        private string EmailRegex(string email)
-        {
-            return "";
-        }
-
+        private string PasswordRegex(string password) => string.Empty;
+        private string CheckIfPasswordsMatch(string password1, string password2) => string.Empty;
+        private string FirstNameRegex(string firstname) => string.Empty;
+        private string LastNameRegex(string lastname) => string.Empty;
+        private string EmailRegex(string email) => string.Empty;
     }
 
     
