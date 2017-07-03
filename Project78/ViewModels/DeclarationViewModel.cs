@@ -13,7 +13,6 @@ namespace Project78.ViewModels
 	public class DeclarationViewModel : ViewModelBase
 	{
 		private Declaration declaration;
-		private Command updateCommand;
         private ImageSource imageSource;
 		public INavigation Navigation;
 
@@ -25,7 +24,6 @@ namespace Project78.ViewModels
 
 		public DeclarationViewModel(Declaration declaration)
 		{
-			//updateCommand = new Command(Post);
 			this.declaration = declaration;
             ImageSource = ImageSource.FromUri(new Uri($"http://37.139.12.76:8080/receipt/{declaration.ReceiptID}/image"));
         }
@@ -47,20 +45,5 @@ namespace Project78.ViewModels
             get => imageSource;
             set => SetProperty(ref imageSource, value);
         }
-
-		public Command UpdateCommand { get { return updateCommand;} }
-
-		//private async void Post()
-		//{
-  //          try
-  //          {
-  //              await new APIService().PostRequestAsync(new StringContent(JsonConvert.SerializeObject(Declaration), Encoding.UTF8, "application/json"), "/declarations");             
-  //          }
-  //          catch
-  //          {
-  //              await App.Current.MainPage.DisplayAlert("Oops!", "We could not create your declaration, please try again!", "Ok");
-  //          }
-  //          await Navigation.PushModalAsync(new NavigationPage(new Project78Page()));
-  //      }
 	}
 }
