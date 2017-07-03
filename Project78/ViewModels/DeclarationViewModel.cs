@@ -6,6 +6,9 @@ using System.Text;
 using System.Diagnostics;
 using Project78.Models;
 using Project78.Services;
+using System.IO;
+using System.Drawing;
+using Android.Graphics;
 
 namespace Project78.ViewModels
 {
@@ -13,13 +16,16 @@ namespace Project78.ViewModels
 	{
 		private Declaration declaration;
 		private Command updateCommand;
+        private Image image;
 		public INavigation Navigation;
+        private byte[] imageByteArray;
 
 		public DeclarationViewModel(int id)
 		{
 			updateCommand = new Command(Patch);
 			declaration = new Declaration();
 			GetData(id);
+            GetImage(id);
 		}
 
 		public DeclarationViewModel(Declaration declaration)
@@ -29,10 +35,32 @@ namespace Project78.ViewModels
 			this.declaration.Date = DateTime.Now.ToString();
 		}
 
-		private async void GetData(int id)
+        private async void GetImage(int id)
+        {
+            ImageByteArray = await new APIService().GetImageAsync(id);
+        }
+
+        private async void GetData(int id)
 		{
 			Declaration = await new APIService().GetDeclarationAsync(id);
 		}
+
+        public byte[] ImageByteArray
+        {
+            get => imageByteArray;
+            set 
+            {
+                SetProperty(ref imageByteArray, value);
+                Debug.WriteLine(value.Length);
+                Image.Source = ImageSource.FromStream(() => new MemoryStream(value));
+            }
+        }
+
+        public Image Image
+        {
+            get => image;
+            set => SetProperty(ref image, value);
+        }
 
 		public Declaration Declaration
 		{

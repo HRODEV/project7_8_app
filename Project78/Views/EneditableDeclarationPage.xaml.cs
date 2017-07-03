@@ -15,6 +15,8 @@ namespace Project78.Views
     public partial class EneditableDeclarationPage : ContentPage
     {
         DeclarationViewModel vm;
+        Image image;
+        APIService apiService = new APIService();
 
         public EneditableDeclarationPage(Declaration declaration)
         {
@@ -23,11 +25,13 @@ namespace Project78.Views
                 var answer = await DisplayAlert("", "Do you want to delete this declaration?", "Yes", "No");
                 if (answer)
                 {
-                    var response = await new APIService().DeleteRequestAsync(declaration.ID, "/declarations/");
+                    var response = await apiService.DeleteRequestAsync(declaration.ID, "/declarations/");
                     await Navigation.PushModalAsync(new NavigationPage(new Project78Page()));
+                    //ImageTest.Source = await apiService.GetImage(declaration.ID);
                 }
             }));
 
+            
             vm = new DeclarationViewModel(declaration.ID);
             this.BindingContext = vm;
 			vm.Declaration.Date = vm?.Declaration?.Date?.Split(' ')?.First() ?? string.Empty;

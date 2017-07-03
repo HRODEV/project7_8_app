@@ -9,8 +9,7 @@ using Project78.Views;
 
 namespace Project78.ViewModels
 {
-    // Why not use the `ViewModelBase` ?
-    class StartUpViewModel
+    class StartUpViewModel : ViewModelBase
     {
         public INavigation Navigation;
 

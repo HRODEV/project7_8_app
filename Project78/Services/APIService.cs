@@ -48,7 +48,9 @@ namespace Project78.Services
             // Why a emptyDeclaration on fail?
             return new Declaration();
         }
-        public async Task<Image> GetImageAsync(int id) => await RequestJson<Image>("/receipt/" + id.ToString() + "/image");
+
+        public async Task<byte[]> GetImageAsync(int id) => await client.GetByteArrayAsync("/receipt/" + id.ToString() + "/image");
+ 
         public async Task<HttpResponseMessage> PostRequestAsync(HttpContent content, string endpoint) => await client.PostAsync(endpoint, content);
         public async Task<HttpResponseMessage> DeleteRequestAsync(int id, string endpoint) => await client.DeleteAsync(endpoint + id);
         public async Task<HttpResponseMessage> PatchRequestAsync(HttpContent content, string endpoint)

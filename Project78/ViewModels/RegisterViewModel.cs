@@ -21,13 +21,12 @@ namespace Project78.ViewModels
         APIService _api = new APIService();
         public INavigation Navigation;
 
-        Action<string> action = (lol) => Debug.WriteLine(lol);
-
         public RegisterViewModel()
         {
             _navigator = new Navigator();
             CreateAccountCommand = new Command(async () =>
             {
+                Debug.WriteLine(FirstName);
                 var jsonUser = JsonConvert.SerializeObject(new User(Email, FirstName, LastName, FirstPassword));
                 var content = new StringContent(jsonUser, Encoding.UTF8, "application/json");           
                 HttpResponseMessage post = await _api.PostRequestAsync(content, "/user");
