@@ -7,8 +7,6 @@ using System.Diagnostics;
 using Project78.Models;
 using Project78.Services;
 using System.IO;
-using System.Drawing;
-using Android.Graphics;
 
 namespace Project78.ViewModels
 {
@@ -16,28 +14,23 @@ namespace Project78.ViewModels
 	{
 		private Declaration declaration;
 		private Command updateCommand;
-        private Image image;
+        private ImageSource imageSource;
 		public INavigation Navigation;
-        private byte[] imageByteArray;
 
 		public DeclarationViewModel(int id)
 		{
 			updateCommand = new Command(Patch);
 			declaration = new Declaration();
 			GetData(id);
-            GetImage(id);
-		}
+            ImageSource = ImageSource.FromUri(new Uri($"http://37.139.12.76:8080/receipt/{id}/image"));
+        }
 
 		public DeclarationViewModel(Declaration declaration)
 		{
 			updateCommand = new Command(Post);
 			this.declaration = declaration;
 			this.declaration.Date = DateTime.Now.ToString();
-		}
-
-        private async void GetImage(int id)
-        {
-            ImageByteArray = await new APIService().GetImageAsync(id);
+            ImageSource = ImageSource.FromUri(new Uri($"http://37.139.12.76:8080/receipt/{declaration.ReceiptID}/image"));
         }
 
         private async void GetData(int id)
@@ -45,28 +38,17 @@ namespace Project78.ViewModels
 			Declaration = await new APIService().GetDeclarationAsync(id);
 		}
 
-        public byte[] ImageByteArray
-        {
-            get => imageByteArray;
-            set 
-            {
-                SetProperty(ref imageByteArray, value);
-                Debug.WriteLine(value.Length);
-                Image.Source = ImageSource.FromStream(() => new MemoryStream(value));
-            }
-        }
-
-        public Image Image
-        {
-            get => image;
-            set => SetProperty(ref image, value);
-        }
-
 		public Declaration Declaration
 		{
             get => declaration;
             set => SetProperty(ref declaration, value);
 		}
+
+        public ImageSource ImageSource
+        {
+            get => imageSource;
+            set => SetProperty(ref imageSource, value);
+        }
 
 		public Command UpdateCommand { get { return updateCommand;} }
 

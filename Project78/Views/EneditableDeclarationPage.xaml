@@ -27,7 +27,7 @@
             <Label x:Name = "Date" Grid.Row = "3" Grid.Column = "1" VerticalOptions="Center" Text="{Binding Path=Declaration.Date, Mode=TwoWay}"/>
             <Label Grid.Row="4" Grid.Column="0" Text="Description" VerticalOptions="Center"/>
             <Label x:Name = "Description" Grid.Row = "4" Grid.Column = "1" VerticalOptions="Center" Text="{Binding Path=Declaration.Description, Mode=TwoWay}"/>
-            <Image Grid.Row = "5" Grid.ColumnSpan="2" VerticalOptions="Center" Source="{Binding Image.Source}"/>
+            <Image Grid.Row = "5" Grid.ColumnSpan="2" VerticalOptions="Center" Source="{Binding Path=ImageSource, Mode=TwoWay}"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
