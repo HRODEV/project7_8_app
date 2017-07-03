@@ -29,7 +29,7 @@
                 </DatePicker>
                 <Label Grid.Row="4" Grid.Column="0" Text="Description" VerticalOptions="Center"/>
                 <Entry x:Name = "Description" Grid.Row = "4" Grid.Column = "1" VerticalOptions="Center" Text="{Binding Path=Declaration.Description, Mode=TwoWay}"/>
-                <Image x:Name = "Image" Grid.Row = "5" Grid.ColumnSpan="2" VerticalOptions="Center" Source="hond.jpg"/>
+                <Image x:Name = "Image" Grid.Row = "5" Grid.ColumnSpan="2" VerticalOptions="Center" Source="{Binding Path=ImageSource, Mode=TwoWay}"/>
                 <Button x:Name="submitButton" Grid.Row = "6" Text="Submit" Grid.ColumnSpan="2" Command="{Binding UpdateCommand}"/>
             </Grid>
         </ScrollView>
