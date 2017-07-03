@@ -24,8 +24,15 @@ namespace Project78.Views
                 var answer = await DisplayAlert("", "Do you want to delete this declaration?", "Yes", "No");
                 if (answer)
                 {
-                    var response = await apiService.DeleteRequestAsync(declaration.ID, "/declarations/");
-                    await Navigation.PushModalAsync(new NavigationPage(new Project78Page()));
+                    try
+                    {
+                        await apiService.DeleteRequestAsync(declaration.ID, "/declarations/");
+                        await Navigation.PushModalAsync(new NavigationPage(new Project78Page()));
+                    }
+                    catch
+                    {
+                        await DisplayAlert("Oops!", "We have encountered a problem!", "Ok");
+                    }
                     //ImageTest.Source = await apiService.GetImage(declaration.ID);
                 }
             }));

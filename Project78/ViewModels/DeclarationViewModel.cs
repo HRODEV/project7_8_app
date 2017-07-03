@@ -25,7 +25,7 @@ namespace Project78.ViewModels
 
 		public DeclarationViewModel(Declaration declaration)
 		{
-			updateCommand = new Command(Post);
+			//updateCommand = new Command(Post);
 			this.declaration = declaration;
 			this.declaration.Date = DateTime.Now.ToString();
             ImageSource = ImageSource.FromUri(new Uri($"http://37.139.12.76:8080/receipt/{declaration.ReceiptID}/image"));
@@ -51,17 +51,17 @@ namespace Project78.ViewModels
 
 		public Command UpdateCommand { get { return updateCommand;} }
 
-		private async void Post()
-		{
-            try
-            {
-                await new APIService().PostRequestAsync(new StringContent(JsonConvert.SerializeObject(Declaration), Encoding.UTF8, "application/json"), "/declarations");             
-            }
-            catch
-            {
-                await App.Current.MainPage.DisplayAlert("Oops!", "We could not create your declaration, please try again!", "Ok");
-            }
-            await Navigation.PushModalAsync(new NavigationPage(new Project78Page()));
-        }
+		//private async void Post()
+		//{
+  //          try
+  //          {
+  //              await new APIService().PostRequestAsync(new StringContent(JsonConvert.SerializeObject(Declaration), Encoding.UTF8, "application/json"), "/declarations");             
+  //          }
+  //          catch
+  //          {
+  //              await App.Current.MainPage.DisplayAlert("Oops!", "We could not create your declaration, please try again!", "Ok");
+  //          }
+  //          await Navigation.PushModalAsync(new NavigationPage(new Project78Page()));
+  //      }
 	}
 }

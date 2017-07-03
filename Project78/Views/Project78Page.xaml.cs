@@ -40,7 +40,7 @@ namespace Project78
                     }
                     catch
                     {
-                        await DisplayAlert("Oops!", "We have encountered a problem!", "I get it");
+                        await DisplayAlert("Oops!", "We have encountered a problem!", "Ok");
                     }
                     Navigation.RemovePage(wait);
 					photo.Dispose();
