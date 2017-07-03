@@ -8,6 +8,7 @@ using System.IO;
 using System.Diagnostics;
 using Project78.ViewModels;
 using System.Threading.Tasks;
+using Plugin.ImageResizer;
 
 namespace Project78
 {
@@ -19,7 +20,6 @@ namespace Project78
 
         public Project78Page()
 		{
-			PhotoImage = new Image();
 			BindingContext = viewModel = new DeclarationsViewModel();
 			InitializeComponent();
 			Title = "Declarations";
@@ -28,12 +28,12 @@ namespace Project78
 			{
 				var wait = new WaitPage();
 
-				var photo = await Plugin.Media.CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions() { });
+				var photo = await Plugin.Media.CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions() { CompressionQuality = 70, PhotoSize = Plugin.Media.Abstractions.PhotoSize.Medium});
                 if (photo != null)
                 {
 					await Navigation.PushAsync(wait);
-                    PhotoImage.Source = ImageSource.FromStream(() => photo.GetStream());
-                    var response = await new APIService().PostImageAsync(new ByteArrayContent(await StreamToByteArrayAsync(photo.GetStream())), GenerateFileName());
+                    var resizedImage = await CrossImageResizer.Current.ResizeImageWithAspectRatioAsync(await StreamToByteArrayAsync(photo.GetStream()), 1080, 1920);
+                    var response = await new APIService().PostImageAsync(new ByteArrayContent(resizedImage), GenerateFileName());
                     await Navigation.PushAsync(new DetailedDeclarationPage(response));
 					Navigation.RemovePage(wait);
 					photo.Dispose();
