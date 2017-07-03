@@ -23,7 +23,15 @@ namespace Project78.ViewModels
 		public async Task LoadData()
 		{
             //should you create a new Collection?
-			Declarations = new ObservableCollection<Declaration>(await new APIService().GetDeclarationsAsync());
+            try
+            {
+                Declarations = new ObservableCollection<Declaration>(await new APIService().GetDeclarationsAsync());
+            }
+            catch
+            {
+                await App.Current.MainPage.DisplayAlert("Oops!", "We have encountered a problem!", "Ok");
+            }
+
         }
 
 		public ObservableCollection<Declaration> Declarations

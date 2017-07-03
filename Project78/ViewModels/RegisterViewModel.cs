@@ -26,15 +26,19 @@ namespace Project78.ViewModels
             _navigator = new Navigator();
             CreateAccountCommand = new Command(async () =>
             {
-                Debug.WriteLine(FirstName);
-                var jsonUser = JsonConvert.SerializeObject(new User(Email, FirstName, LastName, FirstPassword));
-                var content = new StringContent(jsonUser, Encoding.UTF8, "application/json");           
-                HttpResponseMessage post = await _api.PostRequestAsync(content, "/user");
+                try
+                {
+                    var jsonUser = JsonConvert.SerializeObject(new User(Email, FirstName, LastName, FirstPassword));
+                    var content = new StringContent(jsonUser, Encoding.UTF8, "application/json");
+                    HttpResponseMessage post = await _api.PostRequestAsync(content, "/user");
 
-                Debug.WriteLine(await post.Content.ReadAsStringAsync());
-
-                if (post.IsSuccessStatusCode)   
-                    await Navigation.PushModalAsync(new NavigationPage(new StartUpPage()));
+                    if (post.IsSuccessStatusCode)
+                        await Navigation.PushModalAsync(new NavigationPage(new StartUpPage()));
+                }
+                catch
+                {
+                    await App.Current.MainPage.DisplayAlert("Oops!", "We are having issues, please try again later!", "Ok");
+                }
             });
         }
 
