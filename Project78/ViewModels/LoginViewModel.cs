@@ -20,19 +20,28 @@ namespace Project78.ViewModels
 
         public LoginViewModel()
         {
-            NavigateToDeclarations = new Command(NavigateDeclarations, () => !IsBusy);
+            NavigateToDeclarations = new Command(Login, () => !IsBusy);
         }
 
-        void NavigateDeclarations()
+        async void Login()
         {
             //IsBusy = true;
-            var authData = string.Format("{0}:{1}", Email, Password);
-            var authHeaderValue = Convert.ToBase64String(Encoding.UTF8.GetBytes(authData));
-            var authCall = _api.GetAuthenticateUser(authHeaderValue);
 
-            if (authCall != null)
-                Navigation.PushModalAsync(new NavigationPage(new Project78Page()));
+            try
+            {
+                var authData = string.Format("{0}:{1}", Email, Password);
+                var authHeaderValue = Convert.ToBase64String(Encoding.UTF8.GetBytes(authData));
+                var authCall = _api.GetAuthenticateUser(authHeaderValue);
+
+                if (authCall != null)
+                    await Navigation.PushModalAsync(new NavigationPage(new Project78Page()));
+            }
+            catch
+            {
+                await App.Current.MainPage.DisplayAlert("Oops!", "We are having issues, please try again later!", "Ok");
+            }
             //IsBusy = false;
+   
         }
 
         public Command NavigateToDeclarations { get; protected set; }

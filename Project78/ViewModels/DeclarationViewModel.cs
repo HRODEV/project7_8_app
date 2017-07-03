@@ -19,10 +19,8 @@ namespace Project78.ViewModels
 
 		public DeclarationViewModel(int id)
 		{
-			updateCommand = new Command(Patch);
 			declaration = new Declaration();
 			GetData(id);
-            ImageSource = ImageSource.FromUri(new Uri($"http://37.139.12.76:8080/receipt/{id}/image"));
         }
 
 		public DeclarationViewModel(Declaration declaration)
@@ -36,7 +34,8 @@ namespace Project78.ViewModels
         private async void GetData(int id)
 		{
 			Declaration = await new APIService().GetDeclarationAsync(id);
-		}
+            ImageSource = ImageSource.FromUri(new Uri($"http://37.139.12.76:8080/receipt/{Declaration.ReceiptID}/image"));
+        }
 
 		public Declaration Declaration
 		{
@@ -52,20 +51,17 @@ namespace Project78.ViewModels
 
 		public Command UpdateCommand { get { return updateCommand;} }
 
-		private async void Patch()
-		{
-            var content = await (await new APIService()
-                .PatchRequestAsync(new StringContent(JsonConvert.SerializeObject(Declaration), Encoding.UTF8, "application/json"), "/declarations/" + declaration.ID.ToString()))
-                .Content.ReadAsStringAsync();
-
-            Debug.WriteLine(content);
-			await Navigation.PushModalAsync(new NavigationPage(new Project78Page()));
-		}
-
 		private async void Post()
 		{
-            await new APIService().PostRequestAsync(new StringContent(JsonConvert.SerializeObject(Declaration), Encoding.UTF8, "application/json"), "/declarations");
-			await Navigation.PushModalAsync(new NavigationPage(new Project78Page()));			                
-		}
+            try
+            {
+                await new APIService().PostRequestAsync(new StringContent(JsonConvert.SerializeObject(Declaration), Encoding.UTF8, "application/json"), "/declarations");             
+            }
+            catch
+            {
+                await App.Current.MainPage.DisplayAlert("Oops!", "We could not create your declaration, please try again!", "Ok");
+            }
+            await Navigation.PushModalAsync(new NavigationPage(new Project78Page()));
+        }
 	}
 }

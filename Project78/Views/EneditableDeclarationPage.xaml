@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Project78.Views.EneditableDeclarationPage">
     <ContentPage.Content>
+        <ScrollView>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100"/>
@@ -29,5 +30,6 @@
             <Label x:Name = "Description" Grid.Row = "4" Grid.Column = "1" VerticalOptions="Center" Text="{Binding Path=Declaration.Description, Mode=TwoWay}"/>
             <Image Grid.Row = "5" Grid.ColumnSpan="2" VerticalOptions="Center" Source="{Binding Path=ImageSource, Mode=TwoWay}"/>
         </Grid>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

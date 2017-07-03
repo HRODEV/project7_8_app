@@ -33,9 +33,16 @@ namespace Project78
                 {
 					await Navigation.PushAsync(wait);
                     var resizedImage = await CrossImageResizer.Current.ResizeImageWithAspectRatioAsync(await StreamToByteArrayAsync(photo.GetStream()), 1080, 1920);
-                    var response = await new APIService().PostImageAsync(new ByteArrayContent(resizedImage), GenerateFileName());
-                    await Navigation.PushAsync(new DetailedDeclarationPage(response));
-					Navigation.RemovePage(wait);
+                    try
+                    {
+                        var response = await new APIService().PostImageAsync(new ByteArrayContent(resizedImage), GenerateFileName());
+                        await Navigation.PushAsync(new DetailedDeclarationPage(response));
+                    }
+                    catch
+                    {
+                        await DisplayAlert("Oops!", "We have encountered a problem!", "I get it");
+                    }
+                    Navigation.RemovePage(wait);
 					photo.Dispose();
                 }
             }));
