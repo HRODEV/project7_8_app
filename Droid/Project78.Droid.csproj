@@ -38,6 +38,12 @@
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Plugin.ImageResizer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Plugin.ImageResizer.1.0.1-alpha\lib\MonoAndroid10\Plugin.ImageResizer.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.ImageResizer.Abstractions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Plugin.ImageResizer.1.0.1-alpha\lib\MonoAndroid10\Plugin.ImageResizer.Abstractions.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
