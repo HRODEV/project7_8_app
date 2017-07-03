@@ -27,7 +27,6 @@ namespace Project78.ViewModels
 		{
 			//updateCommand = new Command(Post);
 			this.declaration = declaration;
-			this.declaration.Date = DateTime.Now.ToString();
             ImageSource = ImageSource.FromUri(new Uri($"http://37.139.12.76:8080/receipt/{declaration.ReceiptID}/image"));
         }
 

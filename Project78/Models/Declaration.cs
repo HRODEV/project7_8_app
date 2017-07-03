@@ -14,7 +14,7 @@ namespace Project78.Models
         [JsonProperty(PropertyName = "Description")]
 		public string Description { get; set; }
 
-        [JsonProperty(PropertyName = "date")]
+        [JsonProperty(PropertyName = "Date")]
 		public string Date { get; set; }
 
         [JsonProperty(PropertyName = "VATPrice")]
