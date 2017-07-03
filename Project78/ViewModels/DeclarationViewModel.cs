@@ -22,7 +22,6 @@ namespace Project78.ViewModels
 			updateCommand = new Command(Patch);
 			declaration = new Declaration();
 			GetData(id);
-            ImageSource = ImageSource.FromUri(new Uri($"http://37.139.12.76:8080/receipt/{id}/image"));
         }
 
 		public DeclarationViewModel(Declaration declaration)
@@ -36,7 +35,8 @@ namespace Project78.ViewModels
         private async void GetData(int id)
 		{
 			Declaration = await new APIService().GetDeclarationAsync(id);
-		}
+            ImageSource = ImageSource.FromUri(new Uri($"http://37.139.12.76:8080/receipt/{Declaration.ReceiptID}/image"));
+        }
 
 		public Declaration Declaration
 		{
