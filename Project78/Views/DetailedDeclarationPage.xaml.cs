@@ -44,7 +44,8 @@ namespace Project78.Views
                 {
                     try
                     {
-                        await APIService.Instance.PostRequestAsync(new StringContent(JsonConvert.SerializeObject(declaration), Encoding.UTF8, "application/json"), "/declarations");
+                        await APIService.Instance.PostRequestAsync(new StringContent(
+                            JsonConvert.SerializeObject(declaration), Encoding.UTF8, "application/json"), "/declarations");
                     }
                     catch
                     {

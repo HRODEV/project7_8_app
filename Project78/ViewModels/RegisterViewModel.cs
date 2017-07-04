@@ -30,12 +30,15 @@ namespace Project78.ViewModels
         {
             try
             {
-                var jsonUser = JsonConvert.SerializeObject(new User(Email, FirstName, LastName, FirstPassword));
-                var content = new StringContent(jsonUser, Encoding.UTF8, "application/json");
-                HttpResponseMessage post = await APIService.Instance.PostRequestAsync(content, "/user");
-
+                HttpResponseMessage post = await APIService.Instance.PostRequestAsync(new StringContent(
+                    JsonConvert.SerializeObject(new User(Email, FirstName, LastName, FirstPassword)), Encoding.UTF8, "application/json"), "/user");
                 if (post.IsSuccessStatusCode)
                     await Navigation.PushModalAsync(new NavigationPage(new StartUpPage()));
+                else
+                {
+                    string message = await post.Content.ReadAsStringAsync();
+                    await App.Current.MainPage.DisplayAlert("Failed to register", message, "OK");
+                }
             }
             catch
             {
