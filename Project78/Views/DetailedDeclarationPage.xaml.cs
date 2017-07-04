@@ -20,22 +20,22 @@ namespace Project78.Views
 	{
 		private DeclarationViewModel vm;
 
-        DatePicker datePicker = new DatePicker
-        {
-            Format = "ddMMyyyy",
-            VerticalOptions = LayoutOptions.CenterAndExpand
-        };
+        //DatePicker datePicker = new DatePicker
+        //{
+        //    Format = "ddMMyyyy",
+        //    VerticalOptions = LayoutOptions.CenterAndExpand
+        //};
 
         public DetailedDeclarationPage(Declaration declaration)
 		{
-            try
-            {
-                datePicker.Date = DateTime.Parse(declaration.Date);
-            }
-            catch
-            {
-                datePicker.Date = DateTime.Now;
-            }
+            //try
+            //{
+            //    datePicker.Date = DateTime.Parse(declaration.Date);
+            //}
+            //catch
+            //{
+            //    datePicker.Date = DateTime.Now;
+            //}
 
             ToolbarItems.Add(new ToolbarItem("Submit", null, async () =>
             {
@@ -43,7 +43,7 @@ namespace Project78.Views
                 if (answer)
                 {
                     try
-                    {
+                     {
                         await APIService.Instance.PostRequestAsync(new StringContent(JsonConvert.SerializeObject(declaration), Encoding.UTF8, "application/json"), "/declarations");
                     }
                     catch

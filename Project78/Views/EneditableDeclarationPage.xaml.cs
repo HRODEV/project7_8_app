@@ -38,7 +38,7 @@ namespace Project78.Views
             
             vm = new DeclarationViewModel(declaration.ID);
             this.BindingContext = vm;
-			vm.Declaration.Date = vm?.Declaration?.Date?.Split(' ')?.First() ?? string.Empty;
+			//vm.Declaration.Date = vm?.Declaration?.Date?.Split(' ')?.First() ?? string.Empty;
             vm.Navigation = Navigation;
             InitializeComponent();
         }

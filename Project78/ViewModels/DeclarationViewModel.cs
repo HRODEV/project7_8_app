@@ -15,7 +15,6 @@ namespace Project78.ViewModels
 		private Declaration declaration;
         private ImageSource imageSource;
 		public INavigation Navigation;
-        private DateTime declarationDate;
 
 		public DeclarationViewModel(int id)
 		{
