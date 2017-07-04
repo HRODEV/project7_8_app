@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Net.Http;
 using Project78.Models;
-
+using System.Text;
 
 namespace Project78.Services
 {
