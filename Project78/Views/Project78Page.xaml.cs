@@ -38,7 +38,7 @@ namespace Project78
                         var response = await APIService.Instance.PostImageAsync(new ByteArrayContent(resizedImage), GenerateFileName());
                         await Navigation.PushAsync(new DetailedDeclarationPage(response));
                     }
-                    catch
+                    catch(Exception e)
                     {
                         await DisplayAlert("Oops!", "We have encountered a problem!", "Ok");
                     }
