@@ -37,7 +37,7 @@ namespace Project78.Services
 
             if (response.IsSuccessStatusCode)
             {
-                Authentication auth = JsonConvert.DeserializeObject<Authentication>(responseBody);
+                Authentication auth = JsonConvert.DeserializeObject<Authentication>(responseBody, new JsonSerializerSettings() { Culture = System.Globalization.CultureInfo.InvariantCulture });
 
                 client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Convert.ToBase64String(Encoding.UTF8.GetBytes(auth.Token)));
                 return true;
@@ -64,7 +64,7 @@ namespace Project78.Services
             if (response.IsSuccessStatusCode)
             {
                 string responseBody = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<Declaration>(responseBody);
+                return JsonConvert.DeserializeObject<Declaration>(responseBody, new JsonSerializerSettings() { Culture = System.Globalization.CultureInfo.InvariantCulture });
             }
             // Why a emptyDeclaration on fail?
             return new Declaration();
@@ -88,7 +88,7 @@ namespace Project78.Services
         {
             HttpResponseMessage responseshit = await client.GetAsync(endpoint);
             string responseBody = await responseshit.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<T>(responseBody);
+            return JsonConvert.DeserializeObject<T>(responseBody, new JsonSerializerSettings() { Culture = System.Globalization.CultureInfo.InvariantCulture });
         }
 	}
 }

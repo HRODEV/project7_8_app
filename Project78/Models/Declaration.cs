@@ -1,5 +1,7 @@
 ﻿﻿using Newtonsoft.Json;
 using System;
+using System.Globalization;
+
 namespace Project78.Models
 {
     public class Declaration
@@ -13,16 +15,6 @@ namespace Project78.Models
         [JsonProperty(PropertyName = "Description")]
         public string Description { get; set; }
 
-        //[JsonProperty(PropertyName = "Date")]
-        //public int DateUnitTime { get; set; }
-
-        //[JsonIgnore]
-        //public DateTime DateTime 
-        //{
-        //    get => new DateTime(1970, 1, 1).AddSeconds(DateUnitTime);
-        //    set => DateUnitTime = (value - new DateTime(1970, 1, 1)).Seconds;
-        //}
-
 		[JsonProperty(PropertyName = "Date")]
 		public string DateUnitTime { get; set; }
 
@@ -33,7 +25,7 @@ namespace Project78.Models
             {
                 if (DateUnitTime == "")
                     return DateTime.Now;
-                return Convert.ToDateTime(DateUnitTime);
+                return Convert.ToDateTime(DateUnitTime, new CultureInfo("nl-NL"));
             }
 			set => DateUnitTime = value.ToString();
 		}
