@@ -19,24 +19,25 @@ namespace Project78.Views
 
         public EneditableDeclarationPage(Declaration declaration)
         {
-            ToolbarItems.Add(new ToolbarItem("Delete", null, async () =>
-            {
-                var answer = await DisplayAlert("", "Do you want to delete this declaration?", "Yes", "No");
-                if (answer)
-                {
-                    var response = await apiService.DeleteRequestAsync(declaration.ID, "/declarations/");
-                    await Navigation.PushModalAsync(new NavigationPage(new Project78Page()));
-                    //ImageTest.Source = await apiService.GetImage(declaration.ID);
-                }
-            }));
-            
+            ToolbarItems.Add(new ToolbarItem("Delete", null, onDelete));
+
 
 
             vm = new DeclarationViewModel(declaration.ID);
             this.BindingContext = vm;
-			vm.Declaration.Date = vm?.Declaration?.Date?.Split(' ')?.First() ?? string.Empty;
+            vm.Declaration.Date = vm?.Declaration?.Date?.Split(' ')?.First() ?? string.Empty;
             vm.Navigation = Navigation;
             InitializeComponent();
+        }
+
+        private async void onDelete()
+        {
+            var answer = await DisplayAlert("", "Do you want to delete this declaration?", "Yes", "No");
+            if (answer)
+            {
+                var response = await apiService.DeleteRequestAsync(vm.Declaration.ID, "/declarations/");
+                await Navigation.PushModalAsync(new NavigationPage(new Project78Page()));
+            }
         }
     }
 }
