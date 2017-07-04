@@ -24,7 +24,7 @@
                 <Entry x:Name = "Vat" Grid.Row = "2" Grid.Column = "1" VerticalOptions="Center" Text="{Binding Path=Declaration.VATPrice, Mode=TwoWay}"/>
                 <Label Grid.Row="3" Grid.Column="0" Text="Date" VerticalOptions="Center"/>
                 <!--			<Entry x:Name = "Date" Grid.Row = "3" Grid.Column = "1" VerticalOptions="Center" Text="{Binding Path=Declaration.Date, Mode=TwoWay}"/>-->
-                <DatePicker VerticalOptions="CenterAndExpand" Date="{Binding Path=Declaration.Date}" Grid.Row="3" Grid.Column="1">
+                <DatePicker VerticalOptions="CenterAndExpand" Date="{Binding Path=Declaration.Date, Mode=TwoWay}" Grid.Row="3" Grid.Column="1">
                     <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
                 </DatePicker>
                 <Label Grid.Row="4" Grid.Column="0" Text="Description" VerticalOptions="Center"/>

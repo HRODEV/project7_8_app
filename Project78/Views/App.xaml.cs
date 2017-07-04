@@ -10,6 +10,7 @@ namespace Project78
 		{
 			InitializeComponent();
             //MainPage = new NavigationPage(new Project78Page());
+            APIService _apiSeer = new APIService();
             MainPage = new NavigationPage(new StartUpPage());
         }
 

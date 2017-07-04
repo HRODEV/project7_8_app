@@ -19,18 +19,24 @@ namespace Project78.Views
 	public partial class DetailedDeclarationPage : ContentPage
 	{
 		private DeclarationViewModel vm;
-        private APIService _api = new APIService();
 
         DatePicker datePicker = new DatePicker
         {
-            Format = "D",
+            Format = "ddMMyyyy",
             VerticalOptions = LayoutOptions.CenterAndExpand
         };
 
-
-
         public DetailedDeclarationPage(Declaration declaration)
 		{
+            try
+            {
+                datePicker.Date = DateTime.Parse(declaration.Date);
+            }
+            catch
+            {
+                datePicker.Date = DateTime.Now;
+            }
+
             ToolbarItems.Add(new ToolbarItem("Submit", null, async () =>
             {
                 var answer = await DisplayAlert("", "Are you sure your declaration is finished?", "Yes", "No");
@@ -38,7 +44,7 @@ namespace Project78.Views
                 {
                     try
                     {
-                        await new APIService().PostRequestAsync(new StringContent(JsonConvert.SerializeObject(declaration), Encoding.UTF8, "application/json"), "/declarations");
+                        await APIService.Instance.PostRequestAsync(new StringContent(JsonConvert.SerializeObject(declaration), Encoding.UTF8, "application/json"), "/declarations");
                     }
                     catch
                     {
@@ -47,6 +53,8 @@ namespace Project78.Views
                     await Navigation.PushModalAsync(new NavigationPage(new Project78Page()));
                 }
             }));
+
+
 
             vm = new DeclarationViewModel(declaration);
 			this.BindingContext = vm;

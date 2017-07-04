@@ -32,9 +32,10 @@ namespace Project78.ViewModels
                 var authData = string.Format("{0}:{1}", Email, Password);
                 var authHeaderValue = Convert.ToBase64String(Encoding.UTF8.GetBytes(authData));
                 var authCall = _api.GetAuthenticateUser(authHeaderValue);
-
+                
                 if (authCall != null)
-                    await Navigation.PushModalAsync(new NavigationPage(new Project78Page()));
+                    await Navigation.PushModalAsync(new NavigationPage(new Project78Page()))
+                        
             }
             catch
             {

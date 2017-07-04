@@ -13,26 +13,35 @@ using System.Diagnostics;
 
 namespace Project78.Services
 {
-    public class APIService
+    public sealed class APIService
     {
-        public APIService()
+        private static APIService instance;
+
+        private APIService() { }
+
+        public static APIService Instance
         {
-            client = new HttpClient { BaseAddress = new Uri("http://37.139.12.76:8080") };  
+            get
+            {
+                if (instance == null)
+                    instance = new APIService();
+                return instance;
+            }
         }
         
-        private HttpClient client;
+        private HttpClient client = new HttpClient { BaseAddress = new Uri("http://37.139.12.76:8080") };
 
         public async Task<IEnumerable<Declaration>> GetDeclarationsAsync() => await RequestJson<List<Declaration>>("/declarations");
 
         public User GetAuthenticateUser(string authenticationHeader)
         {
             client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", authenticationHeader);
-
             //return RequestJson<User>("user/auth/");
             return new User("A", "b", "c", "d");
         }
 
         public async Task<Declaration> GetDeclarationAsync(int id) => await RequestJson<Declaration>("/declarations/" + id.ToString());
+
         public async Task<Declaration> PostImageAsync(HttpContent content, string filename)
         {
             var testcontent = new MultipartFormDataContent
