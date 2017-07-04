@@ -9,6 +9,7 @@ using System.Diagnostics;
 using Project78.ViewModels;
 using System.Threading.Tasks;
 using Plugin.ImageResizer;
+using Project78.Services;
 
 namespace Project78
 {
@@ -35,7 +36,7 @@ namespace Project78
                     var resizedImage = await CrossImageResizer.Current.ResizeImageWithAspectRatioAsync(await StreamToByteArrayAsync(photo.GetStream()), 1080, 1920);
                     try
                     {
-                        var response = await new APIService().PostImageAsync(new ByteArrayContent(resizedImage), GenerateFileName());
+                        var response = await APIService.Instance.PostImageAsync(new ByteArrayContent(resizedImage), GenerateFileName());
                         await Navigation.PushAsync(new DetailedDeclarationPage(response));
                     }
                     catch

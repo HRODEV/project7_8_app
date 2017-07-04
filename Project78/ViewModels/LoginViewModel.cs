@@ -16,7 +16,6 @@ namespace Project78.ViewModels
         string email, password;
         bool isBusy = false;
         public INavigation Navigation;
-        APIService _api = new APIService();
 
         public LoginViewModel()
         {
@@ -31,10 +30,10 @@ namespace Project78.ViewModels
             {
                 var authData = string.Format("{0}:{1}", Email, Password);
                 var authHeaderValue = Convert.ToBase64String(Encoding.UTF8.GetBytes(authData));
-                var authCall = _api.GetAuthenticateUser(authHeaderValue);
-                
+                var authCall = APIService.Instance.GetAuthenticateUser(authHeaderValue);
+
                 if (authCall != null)
-                    await Navigation.PushModalAsync(new NavigationPage(new Project78Page()))
+                    await Navigation.PushModalAsync(new NavigationPage(new Project78Page()));
                         
             }
             catch

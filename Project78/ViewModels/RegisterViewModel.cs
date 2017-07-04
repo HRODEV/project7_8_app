@@ -18,7 +18,6 @@ namespace Project78.ViewModels
     class RegisterViewModel : ViewModelBase
     {
         string fpassword, spassword, fname, lname, email;
-        APIService _api = new APIService();
         public INavigation Navigation;
 
         public RegisterViewModel()
@@ -33,7 +32,7 @@ namespace Project78.ViewModels
             {
                 var jsonUser = JsonConvert.SerializeObject(new User(Email, FirstName, LastName, FirstPassword));
                 var content = new StringContent(jsonUser, Encoding.UTF8, "application/json");
-                HttpResponseMessage post = await _api.PostRequestAsync(content, "/user");
+                HttpResponseMessage post = await APIService.Instance.PostRequestAsync(content, "/user");
 
                 if (post.IsSuccessStatusCode)
                     await Navigation.PushModalAsync(new NavigationPage(new StartUpPage()));

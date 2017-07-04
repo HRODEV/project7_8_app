@@ -40,6 +40,8 @@ namespace Project78.Services
             return new User("A", "b", "c", "d");
         }
 
+        public Uri GetImageUri(int receiptID) => new Uri($"{client.BaseAddress}/receipt/{receiptID}/image");
+
         public async Task<Declaration> GetDeclarationAsync(int id) => await RequestJson<Declaration>("/declarations/" + id.ToString());
 
         public async Task<Declaration> PostImageAsync(HttpContent content, string filename)

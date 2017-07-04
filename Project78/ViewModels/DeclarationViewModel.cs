@@ -26,13 +26,13 @@ namespace Project78.ViewModels
 		public DeclarationViewModel(Declaration declaration)
 		{
 			this.declaration = declaration;
-            ImageSource = ImageSource.FromUri(new Uri($"http://37.139.12.76:8080/receipt/{declaration.ReceiptID}/image"));
+            ImageSource = ImageSource.FromUri(APIService.Instance.GetImageUri(declaration.ReceiptID));
         }
 
         private async void GetData(int id)
 		{
-			Declaration = await new APIService().GetDeclarationAsync(id);
-            ImageSource = ImageSource.FromUri(new Uri($"http://37.139.12.76:8080/receipt/{Declaration.ReceiptID}/image"));
+			Declaration = await APIService.Instance.GetDeclarationAsync(id);
+            ImageSource = ImageSource.FromUri(APIService.Instance.GetImageUri(Declaration.ReceiptID));
         }
 
 		public Declaration Declaration
