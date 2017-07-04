@@ -8,7 +8,7 @@
             <Label Text="Email"
                 HorizontalOptions="Center"/>
             <Entry Text="{Binding Email}"
-                x:Name="EntryEmail"/>
+                x:Name="EntryEmail" Keyboard="Email"/>
             <Label Text="Password"
                 HorizontalOptions="Center"/>
             <Entry Text="{Binding Password}"
