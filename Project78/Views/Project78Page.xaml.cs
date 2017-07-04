@@ -9,6 +9,7 @@ using Project78.ViewModels;
 using System.Threading.Tasks;
 using Plugin.ImageResizer;
 using Project78.Services;
+using System.Diagnostics;
 
 namespace Project78
 {
@@ -40,6 +41,7 @@ namespace Project78
                     }
                     catch(Exception e)
                     {
+                        Debug.WriteLine(e);
                         await DisplayAlert("Oops!", "We have encountered a problem!", "Ok");
                     }
                     Navigation.RemovePage(wait);
