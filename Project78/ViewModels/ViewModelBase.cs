@@ -1,7 +1,5 @@
-﻿
-using Project78.Helpers;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
+﻿using Project78.Helpers;
+
 namespace Project78.ViewModels
 {
 	public class ViewModelBase : ObservableObject

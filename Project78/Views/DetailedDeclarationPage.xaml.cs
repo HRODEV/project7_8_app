@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Project78.Models;
-
-
 using Xamarin.Forms;
-using System.Diagnostics;
 using Project78.ViewModels;
 using Project78.Services;
 using System.Net.Http;

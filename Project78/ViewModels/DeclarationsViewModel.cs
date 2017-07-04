@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.Collections.ObjectModel;
 using Project78.Services;
 using Xamarin.Forms;
 using Project78.Models;
