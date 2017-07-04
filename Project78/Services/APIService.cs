@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Net;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.IO;
 using Newtonsoft.Json;
 using System.Net.Http;
-using Microsoft.VisualBasic;
-using System.Text;
-using Xamarin.Forms;
 using Project78.Models;
-using System.Diagnostics;
+
 
 namespace Project78.Services
 {

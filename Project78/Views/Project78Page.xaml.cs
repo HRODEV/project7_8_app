@@ -5,7 +5,6 @@ using Project78.Models;
 using System.Net.Http;
 using System;
 using System.IO;
-using System.Diagnostics;
 using Project78.ViewModels;
 using System.Threading.Tasks;
 using Plugin.ImageResizer;

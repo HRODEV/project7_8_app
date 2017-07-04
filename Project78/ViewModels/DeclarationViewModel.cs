@@ -1,12 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
-using Newtonsoft.Json;
-using System.Net.Http;
-using System.Text;
-using System.Diagnostics;
 using Project78.Models;
 using Project78.Services;
-using System.IO;
 
 namespace Project78.ViewModels
 {

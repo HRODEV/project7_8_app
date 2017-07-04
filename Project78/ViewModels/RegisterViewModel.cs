@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 using Project78.Services;
-using System.Text.RegularExpressions;
 using System.Windows.Input;
 using Xamarin.Forms;
 using Project78.Models;
-using System.Diagnostics;
 using Newtonsoft.Json;
 using System.Net.Http;
 using Project78.Views;
