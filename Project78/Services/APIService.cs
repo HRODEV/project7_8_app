@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Net;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.IO;
 using Newtonsoft.Json;
 using System.Net.Http;
-using Microsoft.VisualBasic;
-using System.Text;
-using Xamarin.Forms;
 using Project78.Models;
-using System.Diagnostics;
+
 
 namespace Project78.Services
 {
@@ -33,14 +28,29 @@ namespace Project78.Services
 
         public async Task<IEnumerable<Declaration>> GetDeclarationsAsync() => await RequestJson<List<Declaration>>("/declarations");
 
-        public User GetAuthenticateUser(string authenticationHeader)
+        public async Task<bool> RequestAuthentication(string email, string password)
         {
-            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", authenticationHeader);
-            //return RequestJson<User>("user/auth/");
-            return new User("A", "b", "c", "d");
+            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.UTF8.GetBytes(string.Format("{0}:{1}", email, password))));
+            HttpResponseMessage response = await client.GetAsync("/user/auth");
+
+            string responseBody = await response.Content.ReadAsStringAsync();
+
+            if (response.IsSuccessStatusCode)
+            {
+                Authentication auth = JsonConvert.DeserializeObject<Authentication>(responseBody);
+
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Convert.ToBase64String(Encoding.UTF8.GetBytes(auth.Token)));
+                return true;
+            }
+            else
+            {
+                // If the result status code is not successfull, the response body will be a string with the error
+                await App.Current.MainPage.DisplayAlert("Failed login", responseBody, "Ok");
+                return false;
+            }
         }
 
-        public Uri GetImageUri(int receiptID) => new Uri($"{client.BaseAddress}/receipt/{receiptID}/image");
+        public Uri GetImageUri(int receiptID) => new Uri($"{client.BaseAddress}receipt/{receiptID}/image");
 
         public async Task<Declaration> GetDeclarationAsync(int id) => await RequestJson<Declaration>("/declarations/" + id.ToString());
 

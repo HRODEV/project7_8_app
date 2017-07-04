@@ -38,6 +38,7 @@
     <Compile Include="Helpers\MessengingCenterAlert.cs" />
     <Compile Include="Helpers\ObservableObject.cs" />
     <Compile Include="Helpers\ObservableRangeCollection.cs" />
+    <Compile Include="Models\Authentication.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Services\INavigationService.cs" />
     <Compile Include="Services\Navigator.cs" />

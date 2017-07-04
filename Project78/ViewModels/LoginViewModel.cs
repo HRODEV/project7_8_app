@@ -28,11 +28,9 @@ namespace Project78.ViewModels
 
             try
             {
-                var authData = string.Format("{0}:{1}", Email, Password);
-                var authHeaderValue = Convert.ToBase64String(Encoding.UTF8.GetBytes(authData));
-                var authCall = APIService.Instance.GetAuthenticateUser(authHeaderValue);
+                var authCall = await APIService.Instance.RequestAuthentication(Email, Password);
 
-                if (authCall != null)
+                if (authCall == true)
                     await Navigation.PushModalAsync(new NavigationPage(new Project78Page()));
                         
             }

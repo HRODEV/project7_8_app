@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Project78.Models;
-
-
 using Xamarin.Forms;
-using System.Diagnostics;
 using Project78.ViewModels;
 using Project78.Services;
 using System.Net.Http;
@@ -43,8 +40,9 @@ namespace Project78.Views
                 if (answer)
                 {
                     try
-                     {
-                        await APIService.Instance.PostRequestAsync(new StringContent(JsonConvert.SerializeObject(declaration), Encoding.UTF8, "application/json"), "/declarations");
+                    {
+                        await APIService.Instance.PostRequestAsync(new StringContent(
+                            JsonConvert.SerializeObject(declaration), Encoding.UTF8, "application/json"), "/declarations");
                     }
                     catch
                     {

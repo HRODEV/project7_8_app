@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Project78.Models
 {
     public class User
     {
-        // add empty constructor usefol for some frameworks
+        // add empty constructor useful for some frameworks
         public User() { }
 
         public User(int id, string email, string fname, string lname, string pw)
