@@ -1,5 +1,5 @@
-﻿using Newtonsoft.Json;
-
+﻿﻿using Newtonsoft.Json;
+using System;
 namespace Project78.Models
 {
     public class Declaration
@@ -29,7 +29,12 @@ namespace Project78.Models
 		[JsonIgnore]
 		public DateTime DateTime
 		{
-			get => Convert.ToDateTime(DateUnitTime);
+            get
+            {
+                if (DateUnitTime == "")
+                    return DateTime.Now;
+                return Convert.ToDateTime(DateUnitTime);
+            }
 			set => DateUnitTime = value.ToString();
 		}
 
