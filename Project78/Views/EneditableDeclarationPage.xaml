@@ -4,29 +4,29 @@
              x:Class="Project78.Views.EneditableDeclarationPage">
     <ContentPage.Content>
         <ScrollView>
-        <Grid>
+        <Grid Margin="10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="35" />
-                <RowDefinition Height="35" />
-                <RowDefinition Height="35" />
-                <RowDefinition Height="35" />
-                <RowDefinition Height="35" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="35" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <Label Grid.Row="0" Grid.Column="0" Text="Title" VerticalOptions="Center"/>
+            <Label Grid.Row="0" Grid.Column="0" Text="Title" Font="Bold" VerticalOptions="Center"/>
             <Label x:Name = "Title" Grid.Row = "0" Grid.Column = "1" VerticalOptions="Center" Text="{Binding Path=Declaration.Title, Mode=TwoWay}"/>
-            <Label Grid.Row="1" Grid.Column="0" Text="Total" VerticalOptions="Center"/>
+            <Label Grid.Row="1" Grid.Column="0" Text="Total €" Font="Bold" VerticalOptions="Center"/>
             <Label x:Name = "Total" Grid.Row = "1" Grid.Column = "1" VerticalOptions="Center" Text="{Binding Path=Declaration.TotalPrice, Mode=TwoWay}"/>
-            <Label Grid.Row="2" Grid.Column="0" Text="VAT" VerticalOptions="Center"/>
+            <Label Grid.Row="2" Grid.Column="0" Text="VAT   €" Font="Bold" VerticalOptions="Center"/>
             <Label x:Name = "Vat" Grid.Row = "2" Grid.Column = "1" VerticalOptions="Center" Text="{Binding Path=Declaration.VATPrice, Mode=TwoWay}"/>
-            <Label Grid.Row="3" Grid.Column="0" Text="Date" VerticalOptions="Center"/>
+            <Label Grid.Row="3" Grid.Column="0" Text="Date" Font="Bold" VerticalOptions="Center"/>
             <Label x:Name = "Date" Grid.Row = "3" Grid.Column = "1" VerticalOptions="Center" Text="{Binding Path=Declaration.DateTime, Mode=TwoWay}"/>
-            <Label Grid.Row="4" Grid.Column="0" Text="Description" VerticalOptions="Center"/>
+            <Label Grid.Row="4" Grid.Column="0" Text="Description" Font="Bold" VerticalOptions="Center"/>
             <Label x:Name = "Description" Grid.Row = "4" Grid.Column = "1" VerticalOptions="Center" Text="{Binding Path=Declaration.Description, Mode=TwoWay}"/>
             <Image Grid.Row = "5" Grid.ColumnSpan="2" VerticalOptions="Center" Source="{Binding Path=ImageSource, Mode=TwoWay}"/>
         </Grid>
