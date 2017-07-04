@@ -25,7 +25,6 @@ namespace Project78.ViewModels
         async void Login()
         {
             //IsBusy = true;
-
             try
             {
                 var authCall = await APIService.Instance.RequestAuthentication(Email, Password);
