@@ -52,6 +52,14 @@ namespace Project78.ViewModels
             }      
         }
 
+        //Not actually implemented
+        private bool CheckFields()
+        {
+            if (User.FirstName != "" && User.LastName != "") 
+                return true;
+            return false;   
+        }
+
         public ICommand CreateAccountCommand { get; protected set; }
 
         public User User
