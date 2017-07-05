@@ -2,6 +2,7 @@
 using Xamarin.Forms;
 using Project78.Models;
 using Project78.Services;
+using System.Globalization;
 
 namespace Project78.ViewModels
 {
@@ -10,6 +11,7 @@ namespace Project78.ViewModels
 		private Declaration declaration;
         private ImageSource imageSource;
 		public INavigation Navigation;
+        private string totalPrice, vatPrice;
 
 		public DeclarationViewModel(int id)
 		{
@@ -29,11 +31,33 @@ namespace Project78.ViewModels
             ImageSource = new UriImageSource { CachingEnabled = false, Uri = APIService.Instance.GetImageUri(Declaration.ReceiptID) };
         }
 
+        public string TotalPrice
+        {
+            get => totalPrice;
+            set
+            {
+                TotalPrice.Replace(",", ".");
+                SetProperty(ref totalPrice, value);
+                Declaration.TotalPrice = float.Parse(TotalPrice);
+            }
+        }
+
+        public string VatPrice
+        {
+            get => vatPrice;
+            set
+            {
+                VatPrice.Replace(",", ".");
+                SetProperty(ref vatPrice, value);
+                Declaration.VATPrice = float.Parse(VatPrice);
+            }
+        }
+
 		public Declaration Declaration
 		{
             get => declaration;
             set => SetProperty(ref declaration, value);
-		}
+        }
 
         public ImageSource ImageSource
         {
