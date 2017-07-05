@@ -11,7 +11,8 @@ namespace Project78.ViewModels
 		private Declaration declaration;
         private ImageSource imageSource;
 		public INavigation Navigation;
-        private string totalPrice, vatPrice;
+        private string totalPrice = "0";
+        private string vatPrice = "0";
 
 		public DeclarationViewModel(int id)
 		{
@@ -22,6 +23,8 @@ namespace Project78.ViewModels
 		public DeclarationViewModel(Declaration declaration)
 		{
 			this.declaration = declaration;
+            VatPrice = declaration.VATPrice.ToString();
+            TotalPrice = declaration.TotalPrice.ToString();
             ImageSource = new UriImageSource { CachingEnabled = false, Uri = APIService.Instance.GetImageUri(declaration.ReceiptID) };
         }
 
@@ -36,10 +39,13 @@ namespace Project78.ViewModels
             get => totalPrice;
             set
             {
-                if (TotalPrice.Contains(","))
-                    TotalPrice.Replace(",", ".");
+                if (value.Contains(","))
+                    value = value.Replace(",", ".");
                 SetProperty(ref totalPrice, value);
-                Declaration.TotalPrice = float.Parse(TotalPrice);
+                if (float.TryParse(value, out float result))
+                {
+                    Declaration.TotalPrice = float.Parse(value, CultureInfo.InvariantCulture.NumberFormat);
+                }
             }
         }
 
@@ -48,10 +54,13 @@ namespace Project78.ViewModels
             get => vatPrice;
             set
             {
-                if (VatPrice.Contains(","))
-                    VatPrice.Replace(",", ".");
+                if (value.Contains(","))
+                    value = value.Replace(",", ".");
                 SetProperty(ref vatPrice, value);
-                Declaration.VATPrice = float.Parse(VatPrice);
+                if (float.TryParse(value, out float result))
+                {
+                    Declaration.VATPrice = float.Parse(value, CultureInfo.InvariantCulture.NumberFormat);
+                }
             }
         }
 
