@@ -27,7 +27,10 @@ namespace Project78.ViewModels
                 HttpResponseMessage post = await APIService.Instance.PostRequestAsync(new StringContent(
                     JsonConvert.SerializeObject(new User(Email, FirstName, LastName, FirstPassword)), Encoding.UTF8, "application/json"), "/user");
                 if (post.IsSuccessStatusCode)
+                {
+                    await App.Current.MainPage.DisplayAlert("", "Your account has been created", "Continue");
                     await Navigation.PushModalAsync(new NavigationPage(new StartUpPage()));
+                }
                 else
                 {
                     string message = await post.Content.ReadAsStringAsync();
