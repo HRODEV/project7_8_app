@@ -45,7 +45,7 @@ namespace Project78.Services
             }
             else
             {
-                // If the result status code is not successfull, the response body will be a string with the error
+                // If the result status code is not successful, the response body will be a string with the error
                 await App.Current.MainPage.DisplayAlert("Failed login", responseBody, "Ok");
                 return false;
             }
