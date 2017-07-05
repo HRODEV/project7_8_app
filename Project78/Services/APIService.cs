@@ -9,6 +9,7 @@ using System.Diagnostics;
 
 namespace Project78.Services
 {
+    //Singleton ApiService
     public sealed class APIService
     {
         private static APIService instance;
@@ -29,7 +30,7 @@ namespace Project78.Services
 
         public async Task<IEnumerable<Declaration>> GetDeclarationsAsync() => await RequestJson<List<Declaration>>("/declarations");
 
-        public async Task<bool> RequestAuthentication(string email, string password)
+        public async Task<bool> RequestAuthenticationToken(string email, string password)
         {
             client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.UTF8.GetBytes(string.Format("{0}:{1}", email, password))));
             HttpResponseMessage response = await client.GetAsync("/user/auth");

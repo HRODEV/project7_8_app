@@ -20,9 +20,7 @@ namespace Project78.ViewModels
 		public DeclarationViewModel(Declaration declaration)
 		{
 			this.declaration = declaration;
-            //ImageSource = ImageSource.FromUri(APIService.Instance.GetImageUri(declaration.ReceiptID));
             ImageSource = new UriImageSource { CachingEnabled = false, Uri = APIService.Instance.GetImageUri(declaration.ReceiptID) };
-
         }
 
         private async void GetData(int id)

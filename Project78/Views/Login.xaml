@@ -19,9 +19,6 @@
                 TextColor="White"
                 BackgroundColor="#22A7F0"
                 x:Name="ButtonLogin"/>
-            <ActivityIndicator IsRunning="{Binding IsBusy}"  
-                    VerticalOptions="Center"
-                    HorizontalOptions="Center"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -30,9 +30,9 @@ namespace Project78.Views
 
         private async void onSubmit()
         {
-            if (Title.Text != "" && Int32.Parse(Total.Text) != 0 && Description.Text != "")
+            if (CheckFields())
             {
-                var answer = await DisplayAlert("", "Are you sure your declaration is finished?", "Yes", "No");
+                bool answer = await DisplayAlert("", "Are you sure your declaration is finished?", "Yes", "No");
                 if (answer)
                 {
                     try
@@ -48,10 +48,26 @@ namespace Project78.Views
                 }
             }
             else
-            {
-                await DisplayAlert("Empty field", "No empty field allowed", "Ok");
-            }
-            
+                await DisplayAlert("Empty field", "No empty field allowed", "Ok");            
+        }
+
+        private bool CheckFields()
+        {
+            int count = 0;
+            if (Double.TryParse(Total.Text, out double total))
+                if (Double.Parse(Total.Text) != 0)
+                    count++;
+
+            if (Double.TryParse(Vat.Text, out double vat))
+                if (Double.Parse(Vat.Text) != 0)
+                    count++;
+
+            if (Title.Text != "" && Description.Text != "")
+                count++;
+
+            if (count == 3)
+                return true;
+            return false;
         }
 
     }
