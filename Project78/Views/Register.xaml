@@ -6,7 +6,7 @@
         <StackLayout Padding="30"
              VerticalOptions="Start">
             <Label Text="Email"
-          HorizontalOptions="Center"/>
+            HorizontalOptions="Center"/>
             <Entry Text="{Binding Path=User.Email, Mode=TwoWay}"
           x:Name="EntryEmail" Keyboard="Email"/>
             <Label Text="FirstName"

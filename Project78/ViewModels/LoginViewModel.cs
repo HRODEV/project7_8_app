@@ -29,7 +29,7 @@ namespace Project78.ViewModels
                 var authCall = await APIService.Instance.RequestAuthenticationToken(Email, Password);
 
                 if (authCall == true)
-                    await Navigation.PushModalAsync(new NavigationPage(new Project78Page()));         
+                    await Navigation.PushModalAsync(new NavigationPage(new Project78Page()));                    
             }
             catch
             {
