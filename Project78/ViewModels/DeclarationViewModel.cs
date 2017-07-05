@@ -1,7 +1,8 @@
-﻿using System;
+﻿﻿using System;
 using Xamarin.Forms;
 using Project78.Models;
 using Project78.Services;
+using System.Globalization;
 
 namespace Project78.ViewModels
 {
