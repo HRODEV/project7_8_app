@@ -36,7 +36,8 @@ namespace Project78.ViewModels
             get => totalPrice;
             set
             {
-                TotalPrice.Replace(",", ".");
+                if (TotalPrice.Contains(","))
+                    TotalPrice.Replace(",", ".");
                 SetProperty(ref totalPrice, value);
                 Declaration.TotalPrice = float.Parse(TotalPrice);
             }
@@ -47,7 +48,8 @@ namespace Project78.ViewModels
             get => vatPrice;
             set
             {
-                VatPrice.Replace(",", ".");
+                if (VatPrice.Contains(","))
+                    VatPrice.Replace(",", ".");
                 SetProperty(ref vatPrice, value);
                 Declaration.VATPrice = float.Parse(VatPrice);
             }
