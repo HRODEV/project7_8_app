@@ -38,7 +38,7 @@ namespace Project78
                     }
                     catch(Exception e)
                     {
-                        Debug.WriteLine(e);
+                        Debug.WriteLine(e.ToString());
                         await DisplayAlert("Oops!", "We have encountered a problem!", "Ok");
                     }
                     Navigation.RemovePage(wait);

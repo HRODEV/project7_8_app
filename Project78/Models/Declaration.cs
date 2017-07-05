@@ -23,9 +23,15 @@ namespace Project78.Models
 		{
             get
             {
-                if (DateUnitTime == "")
+                try
+                {
+                    return Convert.ToDateTime(DateUnitTime, new CultureInfo("nl-NL"));
+                }
+                catch
+                {
                     return DateTime.Now;
-                return Convert.ToDateTime(DateUnitTime, new CultureInfo("nl-NL"));
+                }
+
             }
 			set => DateUnitTime = value.ToString();
 		}
