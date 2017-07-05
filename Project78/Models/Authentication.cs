@@ -9,6 +9,5 @@ namespace Project78.Models
 
         [JsonProperty(PropertyName = "Token")]
         public string Token { get; set; }
-
     }
 }

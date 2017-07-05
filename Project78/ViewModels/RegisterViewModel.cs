@@ -11,44 +11,52 @@ namespace Project78.ViewModels
 {
     class RegisterViewModel : ViewModelBase
     {
-        string fpassword, spassword, fname, lname, email;
+        private User user;
+        string spassword;
         public INavigation Navigation;
 
         public RegisterViewModel()
         {
-            _navigator = new Navigator();
+            user = new User();
             CreateAccountCommand = new Command(CreateAccount);
         }
 
         async void CreateAccount()
         {
-            try
+            if (User.Password == SecondPassword)
             {
-                HttpResponseMessage post = await APIService.Instance.PostRequestAsync(new StringContent(
-                    JsonConvert.SerializeObject(new User(Email, FirstName, LastName, FirstPassword)), Encoding.UTF8, "application/json"), "/user");
-                if (post.IsSuccessStatusCode)
+                try
                 {
-                    await App.Current.MainPage.DisplayAlert("", "Your account has been created", "Continue");
-                    await Navigation.PushModalAsync(new NavigationPage(new StartUpPage()));
+                    {
+                        HttpResponseMessage post = await APIService.Instance.PostRequestAsync(new StringContent(
+                            JsonConvert.SerializeObject(new User(User.Email, User.FirstName, User.LastName, User.Password)), Encoding.UTF8, "application/json"), "/user");
+                        if (post.IsSuccessStatusCode)
+                            await Navigation.PushModalAsync(new NavigationPage(new StartUpPage()));
+                        else
+                        {
+                            string message = await post.Content.ReadAsStringAsync();
+                            await App.Current.MainPage.DisplayAlert("Failed to register", message, "OK");
+                        }
+                    }
                 }
-                else
+
+                catch
                 {
-                    string message = await post.Content.ReadAsStringAsync();
-                    await App.Current.MainPage.DisplayAlert("Failed to register", message, "OK");
+                    await App.Current.MainPage.DisplayAlert("Oops!", "We are having issues, please try again later!", "Ok");
                 }
             }
-            catch
+            else
             {
-                await App.Current.MainPage.DisplayAlert("Oops!", "We are having issues, please try again later!", "Ok");
-            }
+                await App.Current.MainPage.DisplayAlert("Oops!", "Passwords do not match", "Ok");
+            }      
         }
 
         public ICommand CreateAccountCommand { get; protected set; }
 
-        public string FirstPassword
+        public User User
         {
-            get => fpassword;
-            set => SetProperty(ref fpassword, value);
+            get => user;
+            set => SetProperty(ref user, value);
         }
 
         public string SecondPassword
@@ -57,26 +65,7 @@ namespace Project78.ViewModels
             set => SetProperty(ref spassword, value);
         }
 
-        public string FirstName
-        {
-            get => fname;
-            set => SetProperty(ref fname, value);
-        }
-
-        public string LastName
-        {
-            get => lname;
-            set => SetProperty(ref lname, value);
-        }
-
-        public string Email
-        {
-            get => email;
-            set => SetProperty(ref email, value);
-        }
-
-        private readonly INavigationService _navigator;
-
+        //Not implemented Regular expression functions
         private string PasswordRegex(string password) => string.Empty;
         private string CheckIfPasswordsMatch(string password1, string password2) => string.Empty;
         private string FirstNameRegex(string firstname) => string.Empty;
