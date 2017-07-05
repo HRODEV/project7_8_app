@@ -6,12 +6,14 @@
         <StackLayout Padding="30"
                 VerticalOptions="Start">
             <Label Text="Email"
-                HorizontalOptions="Center"/>
-            <Entry Text="{Binding Email}"
+                HorizontalOptions="Center"
+                Font="Bold"/>
+            <Entry Placeholder="Example@TamTam.nl" Text="{Binding Email}"
                 x:Name="EntryEmail" Keyboard="Email"/>
             <Label Text="Password"
-                HorizontalOptions="Center"/>
-            <Entry Text="{Binding Password}"
+                HorizontalOptions="Center"
+                Font="Bold"/>
+            <Entry Placeholder="Password" Text="{Binding Password}"
                 x:Name="EntryPassword"
                 IsPassword="True"/>
             <Button Text="Login"

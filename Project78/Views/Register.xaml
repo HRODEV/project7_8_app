@@ -3,28 +3,26 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Project78.Views.RegisterPage">
     <ContentPage.Content>
-        <StackLayout Padding="30"
-             VerticalOptions="Start">
-            <Label Text="Email"
-          HorizontalOptions="Center"/>
-            <Entry Text="{Binding Path=User.Email, Mode=TwoWay}"
-          x:Name="EntryEmail" Keyboard="Email"/>
-            <Label Text="FirstName"
-                   HorizontalOptions="Center"/>
-            <Entry Text="{Binding Path=User.FirstName, Mode=TwoWay}"
+        <StackLayout Padding="30">
+            <Label Text="Email" 
+                   Font="Bold"/>
+            <Entry Placeholder="Example@TamTam.nl" Text="{Binding Path=User.Email, Mode=TwoWay}" x:Name="EntryEmail" Keyboard="Email"/>
+            <Label Text="Firstname"
+                   Font="Bold"/>
+            <Entry Placeholder="Tammo" Text="{Binding Path=User.FirstName, Mode=TwoWay}"
                    x:Name="EntryFirstName"/>
-            <Label Text="LastName"
-                   HorizontalOptions="Center"/>
-            <Entry Text="{Binding Path=User.LastName, Mode=TwoWay}"
+            <Label Text="Lastname"
+                   Font="Bold"/>
+            <Entry Placeholder="Tam" Text="{Binding Path=User.LastName, Mode=TwoWay}"
                    x:Name="EntryLastName"/>
-            <Label Text="Password"
-          HorizontalOptions="Center"/>
-            <Entry Text="{Binding Path=User.Password, Mode=TwoWay}"
+            <Label Text="Password" 
+                   Font="Bold"/>
+            <Entry Placeholder="Password" Text="{Binding Path=User.Password, Mode=TwoWay}"
                 x:Name="EntryFPassword"
-                IsPassword="True"/>   
-            <Label Text="Password"
-                HorizontalOptions="Center"/>
-            <Entry Text="{Binding SecondPassword, Mode=TwoWay}"
+                IsPassword="True"/>
+            <Label Text="Password" 
+                   Font="Bold"/>
+            <Entry Placeholder="Password" Text="{Binding SecondPassword, Mode=TwoWay}"
                 x:Name="EntrySPassword"
                 IsPassword="True"/>
             <Button Text="Create Account"
