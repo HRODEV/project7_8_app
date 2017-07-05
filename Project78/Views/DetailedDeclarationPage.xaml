@@ -19,9 +19,9 @@
                 <Label Grid.Row="0" Grid.Column="0" Text="Title" Font="Bold" VerticalOptions="Center"/>
                 <Entry x:Name = "Title" Grid.Row = "0" Grid.Column = "1" VerticalOptions="Center" Text="{Binding Path=Declaration.Title, Mode=TwoWay}"/>
                 <Label Grid.Row="1" Grid.Column="0" Text="Total €" Font="Bold" VerticalOptions="Center"/>
-                <Entry x:Name = "Total" Keyboard="Numeric" Grid.Row = "1" Grid.Column = "1" VerticalOptions="Center" Text="{Binding TotalPrice, Mode=TwoWay}"/>
+                <Entry x:Name = "Total" Keyboard="Numeric" Grid.Row = "1" Grid.Column = "1" VerticalOptions="Center" Text="{Binding Path=Declaration.TotalPrice, Mode=TwoWay}"/>
                 <Label Grid.Row="2" Grid.Column="0" Text="VAT   €" Font="Bold" VerticalOptions="Center"/>
-                <Entry x:Name = "Vat" Keyboard="Numeric" Grid.Row = "2" Grid.Column = "1" VerticalOptions="Center" Text="{Binding VatPrice, Mode=TwoWay}"/>
+                <Entry x:Name = "Vat" Keyboard="Numeric" Grid.Row = "2" Grid.Column = "1" VerticalOptions="Center" Text="{Binding Path=Declaration.VATPrice, Mode=TwoWay}"/>
                 <Label Grid.Row="3" Grid.Column="0" Text="Date" Font="Bold" VerticalOptions="Center"/>
                 <DatePicker x:Name="datePicker" VerticalOptions="CenterAndExpand" Date="{Binding Path=Declaration.DateTime, Mode=TwoWay}" Grid.Row="3" Grid.Column="1">
                     <DatePicker.Format>yyyy/MM/dd</DatePicker.Format>
