@@ -5,9 +5,11 @@ using Newtonsoft.Json;
 using System.Net.Http;
 using Project78.Models;
 using System.Text;
+using System.Diagnostics;
 
 namespace Project78.Services
 {
+    //Singleton ApiService
     public sealed class APIService
     {
         private static APIService instance;
@@ -28,7 +30,7 @@ namespace Project78.Services
 
         public async Task<IEnumerable<Declaration>> GetDeclarationsAsync() => await RequestJson<List<Declaration>>("/declarations");
 
-        public async Task<bool> RequestAuthentication(string email, string password)
+        public async Task<bool> RequestAuthenticationToken(string email, string password)
         {
             client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.UTF8.GetBytes(string.Format("{0}:{1}", email, password))));
             HttpResponseMessage response = await client.GetAsync("/user/auth");
@@ -37,14 +39,14 @@ namespace Project78.Services
 
             if (response.IsSuccessStatusCode)
             {
-                Authentication auth = JsonConvert.DeserializeObject<Authentication>(responseBody);
+                Authentication auth = JsonConvert.DeserializeObject<Authentication>(responseBody, new JsonSerializerSettings() { Culture = System.Globalization.CultureInfo.InvariantCulture });
 
                 client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Convert.ToBase64String(Encoding.UTF8.GetBytes(auth.Token)));
                 return true;
             }
             else
             {
-                // If the result status code is not successfull, the response body will be a string with the error
+                // If the result status code is not successful, the response body will be a string with the error
                 await App.Current.MainPage.DisplayAlert("Failed login", responseBody, "Ok");
                 return false;
             }
@@ -64,7 +66,7 @@ namespace Project78.Services
             if (response.IsSuccessStatusCode)
             {
                 string responseBody = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<Declaration>(responseBody);
+                return JsonConvert.DeserializeObject<Declaration>(responseBody, new JsonSerializerSettings() { Culture = System.Globalization.CultureInfo.InvariantCulture });
             }
             // Why a emptyDeclaration on fail?
             return new Declaration();
@@ -88,7 +90,7 @@ namespace Project78.Services
         {
             HttpResponseMessage responseshit = await client.GetAsync(endpoint);
             string responseBody = await responseshit.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<T>(responseBody);
+            return JsonConvert.DeserializeObject<T>(responseBody, new JsonSerializerSettings() { Culture = System.Globalization.CultureInfo.InvariantCulture });
         }
 	}
 }

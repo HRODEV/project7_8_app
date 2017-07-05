@@ -10,7 +10,6 @@ namespace Project78.ViewModels
 		private Declaration declaration;
         private ImageSource imageSource;
 		public INavigation Navigation;
-        private DateTime declarationDate;
 
 		public DeclarationViewModel(int id)
 		{
@@ -21,13 +20,13 @@ namespace Project78.ViewModels
 		public DeclarationViewModel(Declaration declaration)
 		{
 			this.declaration = declaration;
-            ImageSource = ImageSource.FromUri(APIService.Instance.GetImageUri(declaration.ReceiptID));
+            ImageSource = new UriImageSource { CachingEnabled = false, Uri = APIService.Instance.GetImageUri(declaration.ReceiptID) };
         }
 
         private async void GetData(int id)
 		{
 			Declaration = await APIService.Instance.GetDeclarationAsync(id);
-            ImageSource = ImageSource.FromUri(APIService.Instance.GetImageUri(Declaration.ReceiptID));
+            ImageSource = new UriImageSource { CachingEnabled = false, Uri = APIService.Instance.GetImageUri(Declaration.ReceiptID) };
         }
 
 		public Declaration Declaration

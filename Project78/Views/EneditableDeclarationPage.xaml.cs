@@ -16,11 +16,9 @@ namespace Project78.Views
         {
             ToolbarItems.Add(new ToolbarItem("Delete", null, onDelete));
 
-
-
             vm = new DeclarationViewModel(declaration.ID);
             this.BindingContext = vm;
-            vm.Declaration.Date = vm?.Declaration?.Date?.Split(' ')?.First() ?? string.Empty;
+
             vm.Navigation = Navigation;
             InitializeComponent();
         }

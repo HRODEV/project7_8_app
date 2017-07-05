@@ -19,43 +19,25 @@ namespace Project78.ViewModels
 
         public LoginViewModel()
         {
-            NavigateToDeclarations = new Command(Login, () => !IsBusy);
+            NavigateToDeclarations = new Command(Login);
         }
 
         async void Login()
         {
-            //IsBusy = true;
-
             try
             {
-                var authCall = await APIService.Instance.RequestAuthentication(Email, Password);
+                var authCall = await APIService.Instance.RequestAuthenticationToken(Email, Password);
 
                 if (authCall == true)
-                    await Navigation.PushModalAsync(new NavigationPage(new Project78Page()));
-                        
+                    await Navigation.PushModalAsync(new NavigationPage(new Project78Page()));         
             }
             catch
             {
                 await App.Current.MainPage.DisplayAlert("Oops!", "We are having issues, please try again later!", "Ok");
-            }
-            //IsBusy = false;
-   
+            } 
         }
 
         public Command NavigateToDeclarations { get; protected set; }
-
-        public bool IsBusy
-        {
-            get { return isBusy; }
-            // Why always set to FALSE??
-            set
-            {
-                isBusy = false;
-                //isBusy = value;
-                //OnPropertyChanged("IsBusy");
-                //NavigateToDeclarations.ChangeCanExecute();
-            }
-        }
 
         public string Email
         {

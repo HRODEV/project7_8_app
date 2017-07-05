@@ -7,24 +7,24 @@
              VerticalOptions="Start">
             <Label Text="Email"
           HorizontalOptions="Center"/>
-            <Entry Text="{Binding Email}"
-          x:Name="EntryEmail"/>
+            <Entry Text="{Binding Path=User.Email, Mode=TwoWay}"
+          x:Name="EntryEmail" Keyboard="Email"/>
             <Label Text="FirstName"
                    HorizontalOptions="Center"/>
-            <Entry Text="{Binding FirstName}"
+            <Entry Text="{Binding Path=User.FirstName, Mode=TwoWay}"
                    x:Name="EntryFirstName"/>
             <Label Text="LastName"
                    HorizontalOptions="Center"/>
-            <Entry Text="{Binding LastName}"
+            <Entry Text="{Binding Path=User.LastName, Mode=TwoWay}"
                    x:Name="EntryLastName"/>
             <Label Text="Password"
           HorizontalOptions="Center"/>
-            <Entry Text="{Binding FirstPassword}"
+            <Entry Text="{Binding Path=User.Password, Mode=TwoWay}"
                 x:Name="EntryFPassword"
                 IsPassword="True"/>   
             <Label Text="Password"
                 HorizontalOptions="Center"/>
-            <Entry Text="{Binding SecondPassword}"
+            <Entry Text="{Binding SecondPassword, Mode=TwoWay}"
                 x:Name="EntrySPassword"
                 IsPassword="True"/>
             <Button Text="Create Account"

@@ -16,33 +16,29 @@ namespace Project78.Views
 	public partial class DetailedDeclarationPage : ContentPage
 	{
 		private DeclarationViewModel vm;
-
-        DatePicker datePicker = new DatePicker
-        {
-            Format = "ddMMyyyy",
-            VerticalOptions = LayoutOptions.CenterAndExpand
-        };
+        private ICommand SubmitDeclaration { get; set; }
 
         public DetailedDeclarationPage(Declaration declaration)
 		{
-            try
-            {
-                datePicker.Date = DateTime.Parse(declaration.Date);
-            }
-            catch
-            {
-                datePicker.Date = DateTime.Now;
-            }
+            ToolbarItems.Add(new ToolbarItem("Submit", null, onSubmit));
+        
+            vm = new DeclarationViewModel(declaration);
+			this.BindingContext = vm;
+			vm.Navigation = Navigation;
+			InitializeComponent();
+		}
 
-            ToolbarItems.Add(new ToolbarItem("Submit", null, async () =>
+        private async void onSubmit()
+        {
+            if (CheckFields())
             {
-                var answer = await DisplayAlert("", "Are you sure your declaration is finished?", "Yes", "No");
+                bool answer = await DisplayAlert("", "Are you sure your declaration is finished?", "Yes", "No");
                 if (answer)
                 {
                     try
                     {
                         await APIService.Instance.PostRequestAsync(new StringContent(
-                            JsonConvert.SerializeObject(declaration), Encoding.UTF8, "application/json"), "/declarations");
+                            JsonConvert.SerializeObject(vm.Declaration), Encoding.UTF8, "application/json"), "/declarations");
                     }
                     catch
                     {
@@ -50,14 +46,29 @@ namespace Project78.Views
                     }
                     await Navigation.PushModalAsync(new NavigationPage(new Project78Page()));
                 }
-            }));
+            }
+            else
+                await DisplayAlert("Empty field", "No empty field allowed", "Ok");            
+        }
 
+        private bool CheckFields()
+        {
+            int count = 0;
+            if (Double.TryParse(Total.Text, out double total))
+                if (Double.Parse(Total.Text) != 0)
+                    count++;
 
+            if (Double.TryParse(Vat.Text, out double vat))
+                if (Double.Parse(Vat.Text) != 0)
+                    count++;
 
-            vm = new DeclarationViewModel(declaration);
-			this.BindingContext = vm;
-			vm.Navigation = Navigation;
-			InitializeComponent();
-		}
-	}
+            if (Title.Text != "" && Description.Text != "")
+                count++;
+
+            if (count == 3)
+                return true;
+            return false;
+        }
+
+    }
 }

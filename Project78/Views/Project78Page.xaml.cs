@@ -8,14 +8,12 @@ using System.IO;
 using Project78.ViewModels;
 using System.Threading.Tasks;
 using Plugin.ImageResizer;
-using Project78.Services;
+using System.Diagnostics;
 
 namespace Project78
 {
 	public partial class Project78Page : ContentPage
 	{
-        private readonly INavigationService _navigationService = new Navigator();
-        private Image PhotoImage;
         private readonly DeclarationsViewModel viewModel;
 
         public Project78Page()
@@ -38,8 +36,9 @@ namespace Project78
                         var response = await APIService.Instance.PostImageAsync(new ByteArrayContent(resizedImage), GenerateFileName());
                         await Navigation.PushAsync(new DetailedDeclarationPage(response));
                     }
-                    catch
+                    catch(Exception e)
                     {
+                        Debug.WriteLine(e.ToString());
                         await DisplayAlert("Oops!", "We have encountered a problem!", "Ok");
                     }
                     Navigation.RemovePage(wait);
@@ -57,7 +56,6 @@ namespace Project78
         private string GenerateFileName()
         {
             Random rnd = new Random();
-            //should be done serverside
 			return rnd.Next(10000000, 99999999).ToString() + ".jpg";
         }
 
